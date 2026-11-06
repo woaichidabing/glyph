@@ -54,10 +54,14 @@ npm run desktop    # 会自己拉起后端
 
 ## 词典数据
 
-词典库 `data/dict.db` 体积较大，不随仓库分发。需要词典功能时：
+`data/dict.db` 已随仓库提供，开箱即用。
+
+数据来自 [ECDICT](https://github.com/skywind3000/ECDICT)（MIT，Copyright (c) 2025 Linwei），
+许可证与说明见 [data/README.md](data/README.md)。
+
+需要重新构建时（需要 ECDICT 的 CSV）：
 
 ```bash
-# 从 ECDICT 的 CSV 构建（见 scripts/build_dict_db.py 顶部说明）
 python scripts/build_dict_db.py
 ```
 
