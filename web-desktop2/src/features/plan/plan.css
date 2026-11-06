@@ -1,0 +1,102 @@
+/* 由 template.css 按功能拆出：原文第 450-550 行 */
+/* ============ 6.7 计划 ============ */
+#view-plan{padding:20px 26px 0}
+.plan-wrap{max-width:1080px;margin:0 auto;padding-bottom:70px}
+.plan-tabs{display:flex;align-items:center;gap:4px;margin-bottom:16px}
+.ptab{height:30px;padding:0 14px;border-radius:999px;font-size:var(--fs-body);color:rgb(var(--ink) /.55)}
+.ptab:hover{background:rgb(var(--ink) /.05)}
+.ptab.on{background:rgb(var(--ink) /.08);color:rgb(var(--ink) /.95);font-weight:500}
+.plan-tabs .sp{flex:1}
+.day-head{display:flex;align-items:baseline;gap:12px}
+.day-head h2{font-size:var(--fs-title);font-weight:600}
+.day-progress{font-size:var(--fs-footnote);color:rgb(var(--ink) /.5);font-variant-numeric:tabular-nums}
+.day-bar{height:4px;border-radius:3px;background:rgb(var(--ink) /.1);overflow:hidden;margin:10px 0 14px}
+.day-bar i{display:block;height:100%;width:25%;border-radius:3px;background:var(--accent);transition:width .2s}
+.tasks{display:flex;flex-direction:column;gap:6px}
+.task{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;
+  border:1px solid rgb(var(--ink) /.08);background:rgb(var(--panel-rgb))}
+.tcheck{width:20px;height:20px;border-radius:50%;border:1.5px solid rgb(var(--ink) /.3);
+  display:grid;place-items:center;flex-shrink:0;color:transparent;transition:.15s}
+.tcheck:hover{border-color:var(--accent)}
+.task.done .tcheck{background:var(--sem-green);border-color:var(--sem-green);color:#fff}
+.task.done .tcheck::after{content:"✓";font-size:var(--fs-caption)}
+.task .t-title{flex:1;min-width:0;font-size:var(--fs-body);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.task.done .t-title{color:rgb(var(--ink) /.4);text-decoration:line-through}
+.t-src{flex-shrink:0;font-size:var(--fs-caption);padding:2px 8px;border-radius:999px;
+  background:rgb(var(--ink) /.06);color:rgb(var(--ink) /.5)}
+.t-src.glyph{background:color-mix(in srgb,var(--accent) 10%,transparent);color:var(--accent)}
+.t-go{flex-shrink:0;font-size:var(--fs-footnote);color:var(--accent);padding:3px 8px;border-radius:7px}
+.t-go:hover{background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.plan-input{display:flex;align-items:center;gap:8px;margin-top:14px;padding:10px 12px}
+.plan-input input{flex:1;border:none;outline:none;background:transparent;font-size:var(--fs-body);min-width:0}
+.plan-input input::placeholder{color:rgb(var(--ink) /.38)}
+.wgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.wcell{border:1px solid rgb(var(--ink) /.08);border-radius:12px;background:rgb(var(--panel-rgb));
+  padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;min-height:92px}
+.wcell .wd{font-size:var(--fs-caption);color:rgb(var(--ink) /.45)}
+.wcell .wn{font-size:var(--fs-prose);font-weight:600;font-variant-numeric:tabular-nums}
+.wcell .wc{font-size:var(--fs-caption);color:rgb(var(--ink) /.5)}
+.wcell .wc.ok{color:var(--sem-green)}
+.wcell.past{opacity:.75}
+.wcell.today{border-color:color-mix(in srgb,var(--accent) 55%,transparent);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 55%,transparent)}
+.wcell.today .wn{color:var(--accent)}
+.w-note{font-size:var(--fs-footnote);color:rgb(var(--ink) /.45);margin-top:12px}
+.mhead{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:4px}
+.mhead span{text-align:center;font-size:var(--fs-caption);color:rgb(var(--ink) /.45)}
+.mgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.mcell{aspect-ratio:1.15;border:1px solid rgb(var(--ink) /.07);border-radius:10px;
+  background:rgb(var(--panel-rgb));display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:3px;font-size:var(--fs-footnote);color:rgb(var(--ink) /.6);font-variant-numeric:tabular-nums}
+.mcell i{font-style:normal}
+.mcell b{width:5px;height:5px;border-radius:50%;background:var(--sem-green)}
+.mcell.blank{visibility:hidden}
+.mcell.today{border-color:color-mix(in srgb,var(--accent) 55%,transparent);color:var(--accent)}
+.m-stats{display:flex;gap:18px;margin-top:12px;font-size:var(--fs-footnote);color:rgb(var(--ink) /.55)}
+.m-stats b{color:rgb(var(--ink) /.9)}
+/* 目标封面卡：计划从哪次对话来、到哪了 */
+.goal-card{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px;
+  border:1px solid rgb(var(--ink) /.08);border-radius:14px;background:rgb(var(--panel-rgb));padding:12px 16px}
+.g-main{display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-width:0}
+.g-badge{font-size:var(--fs-caption);padding:2px 8px;border-radius:999px;flex-shrink:0;
+  background:color-mix(in srgb,var(--accent) 10%,transparent);color:var(--accent)}
+.goal-card b{font-size:var(--fs-prose);font-weight:600}
+.goal-card .g-sub{font-size:var(--fs-footnote);color:rgb(var(--ink) /.5)}
+.g-progress{display:flex;align-items:center;gap:8px;margin-left:auto}
+.g-bar{width:120px;height:4px;border-radius:3px;background:rgb(var(--ink) /.1);overflow:hidden}
+.g-bar i{display:block;height:100%;width:25%;background:var(--accent)}
+.g-progress span{font-size:var(--fs-footnote);color:rgb(var(--ink) /.55);white-space:nowrap;font-variant-numeric:tabular-nums}
+.g-more{font-size:var(--fs-footnote);color:var(--accent);padding:4px 8px;border-radius:8px}
+.g-more:hover{background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.g-ms{flex-basis:100%;display:flex;gap:16px;flex-wrap:wrap;font-size:var(--fs-footnote);color:rgb(var(--ink) /.6);
+  border-top:1px dashed rgb(var(--ink) /.1);padding-top:10px}
+/* 弱文字小按钮（首页通知条「知道了」等复用） */
+.mc-link{font-size:var(--fs-footnote);color:var(--accent);padding:2px 6px;border-radius:6px}
+.mc-link:hover{background:color-mix(in srgb,var(--accent) 10%,transparent)}
+/* 断签弹性减量横幅（Glyph 口吻，可关） */
+.miss-note{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding:9px 12px;
+  border-radius:12px;border:1px solid color-mix(in srgb,var(--sem-yellow-bg) 80%,transparent);
+  background:color-mix(in srgb,var(--sem-yellow-bg) 30%,transparent);
+  font-size:var(--fs-footnote);color:rgb(var(--ink) /.75)}
+.miss-note .sp{flex:1}
+.miss-note button{font-size:var(--fs-footnote);color:rgb(var(--ink) /.55);padding:2px 8px;border-radius:7px}
+.miss-note button:hover{background:rgb(var(--ink) /.06)}
+/* 任务行：⋯ 菜单（换一件/推到明天/删掉） */
+.task{position:relative}
+.t-more{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;
+  color:rgb(var(--ink) /.35);flex-shrink:0}
+.t-more:hover{background:rgb(var(--ink) /.07);color:rgb(var(--ink) /.7)}
+.task-menu{position:absolute;right:8px;top:calc(100% - 6px);z-index:40;min-width:176px;
+  border-radius:12px;padding:5px;box-shadow:0 12px 32px -8px rgb(10 12 16 /.35)}
+.task-menu button{display:block;width:100%;text-align:left;padding:7px 10px;border-radius:8px;
+  font-size:var(--fs-footnote);color:rgb(var(--ink) /.8)}
+.task-menu button:hover{background:rgb(var(--ink) /.06)}
+.task-menu button.danger{color:var(--sem-red)}
+html[data-panel="light"] .task-menu{background:rgb(var(--panel-rgb))}
+html[data-panel="dark"] .task-menu{background:rgb(var(--panel-rgb))}
+/* 今日全清反馈 */
+.allclear{display:flex;align-items:center;gap:8px;margin-top:10px;padding:10px 12px;border-radius:12px;
+  border:1px solid color-mix(in srgb,var(--sem-green) 25%,transparent);
+  background:color-mix(in srgb,var(--sem-green) 8%,transparent);
+  font-size:var(--fs-footnote);color:rgb(var(--ink) /.8)}
+.allclear b{color:var(--sem-green);font-size:var(--fs-body)}

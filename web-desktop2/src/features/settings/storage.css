@@ -1,0 +1,86 @@
+/* 设置 · 存储与备份（B 方案） */
+.set-modal.set-modal-wide{width:min(920px, calc(100vw - 48px));max-width:calc(100vw - 48px)}
+.set-modal-wide .set-nav{flex-basis:168px}
+.set-modal-wide .set-pane{padding:26px 30px 24px;max-height:min(72vh, 680px);overflow:auto}
+.set-foot-note{font-size:var(--fs-caption);color:rgb(var(--ink)/.38)}
+
+.stg{display:flex;flex-direction:column;gap:12px;color:rgb(var(--ink))}
+.stg-loading{padding:28px 0;color:rgb(var(--ink)/.45);font-size:var(--fs-body)}
+.stg-hero{border:1px solid rgb(var(--ink)/.12);border-radius:12px;padding:16px;background:rgb(var(--ink)/.018)}
+.stg-path-top{display:flex;align-items:center;gap:8px}
+.stg-eyebrow{font-size:var(--fs-caption);color:rgb(var(--ink)/.45);font-weight:600}
+.stg-badge{margin-left:auto;font-size:var(--fs-caption);line-height:1;padding:4px 6px;border-radius:5px;
+  background:rgb(var(--ink)/.055);color:rgb(var(--ink)/.45);font-weight:600}
+.stg-path{margin-top:7px;font-family:ui-monospace,Consolas,"Liberation Mono",monospace;
+  font-size:13px;font-weight:600;color:rgb(var(--ink)/.88);word-break:break-all;line-height:1.55}
+.stg-note{margin:7px 0 0;font-size:var(--fs-footnote);line-height:1.7;color:rgb(var(--ink)/.48)}
+.stg-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.stg-btn{height:32px;padding:0 12px;border-radius:8px;border:1px solid rgb(var(--ink)/.14);
+  background:rgb(var(--panel-rgb));color:rgb(var(--ink)/.68);font:inherit;font-size:var(--fs-footnote);cursor:pointer}
+.stg-btn:hover{border-color:color-mix(in srgb,var(--accent) 48%,transparent);color:var(--accent)}
+.stg-btn:disabled{opacity:.55;cursor:default}
+.stg-btn.primary{background:var(--btn-primary-bg);border-color:transparent;color:var(--btn-primary-ink);font-weight:600}
+.stg-btn.primary:hover:not(:disabled){filter:brightness(1.06);color:var(--btn-primary-ink)}
+
+.stg-btn.small{height:28px;padding:0 10px}
+
+.stg-stale{display:flex;align-items:flex-start;gap:8px;margin-top:-2px;border-radius:9px;
+  background:color-mix(in srgb,var(--sem-orange,#c98a2e) 10%,transparent);padding:9px 10px;
+  color:var(--sem-orange,#9a651d);font-size:var(--fs-caption);line-height:1.6}
+.stg-stale b{font-weight:650}
+.stg-stale-dot{width:5px;height:5px;border-radius:50%;background:currentColor;margin-top:5px;flex:none}
+.stg-stale button{margin-left:auto;border:0;background:none;color:currentColor;font:inherit;
+  font-size:var(--fs-caption);font-weight:650;cursor:pointer;white-space:nowrap;padding:0}
+.stg-stale button:disabled{opacity:.5;cursor:default}
+
+.stg-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid rgb(var(--ink)/.08);
+  border-bottom:1px solid rgb(var(--ink)/.08)}
+.stg-stat{padding:11px 0 11px 14px;border-left:1px solid rgb(var(--ink)/.08)}
+.stg-stat:first-child{padding-left:0;border-left:0}
+.stg-stat span{display:block;font-size:var(--fs-caption);color:rgb(var(--ink)/.42)}
+.stg-stat b{display:block;margin-top:3px;font-size:var(--fs-body);font-weight:650;color:rgb(var(--ink)/.85);letter-spacing:-.01em}
+
+.stg-section{margin-top:2px}
+.stg-sec-head{display:flex;align-items:baseline;gap:8px;padding:0 1px 7px;border-bottom:1px solid rgb(var(--ink)/.08)}
+.stg-sec-head b{font-size:var(--fs-footnote);font-weight:650}
+.stg-sec-head span{font-size:var(--fs-caption);color:rgb(var(--ink)/.38)}
+.stg-row{display:flex;align-items:center;gap:12px;padding:11px 1px;border-bottom:1px solid rgb(var(--ink)/.06)}
+.stg-row b{display:block;font-size:var(--fs-footnote);font-weight:600}
+.stg-row p{margin:2px 0 0;font-size:var(--fs-caption);line-height:1.6;color:rgb(var(--ink)/.42)}
+.stg-row .stg-btn{margin-left:auto;flex:none}
+.stg-footnote{font-size:var(--fs-caption);line-height:1.7;color:rgb(var(--ink)/.4);padding:9px 10px;
+  border-radius:9px;background:rgb(var(--ink)/.035)}
+
+.stg-mask{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:20px;
+  background:rgb(5 8 12 / .48);backdrop-filter:blur(3px)}
+.stg-dialog{width:520px;max-width:100%;max-height:calc(100vh - 40px);overflow:auto;background:rgb(var(--panel-rgb));border:1px solid rgb(var(--ink)/.12);
+  border-radius:var(--r-panel);padding:20px;box-shadow:0 28px 80px -26px rgb(0 0 0 /.55)}
+html[data-panel="dark"] .stg-dialog{border-color:rgb(255 255 255 / .10)}
+.stg-dialog-head{display:flex;align-items:center;gap:10px}
+.stg-dialog-head h3{margin:0;font-size:var(--fs-entry);font-weight:650}
+.stg-x{margin-left:auto;width:28px;height:28px;border:0;border-radius:8px;background:none;
+  color:rgb(var(--ink)/.45);font-size:18px;cursor:pointer}
+.stg-x:hover{background:rgb(var(--ink)/.06)}
+.stg-dialog-sub{margin:7px 0 16px;font-size:var(--fs-footnote);line-height:1.7;color:rgb(var(--ink)/.48)}
+.stg-label{display:block;margin-bottom:6px;font-size:var(--fs-caption);font-weight:600;color:rgb(var(--ink)/.58)}
+.stg-input{width:100%;height:38px;border-radius:9px;border:1px solid rgb(var(--ink)/.14);
+  background:rgb(var(--ink)/.035);padding:0 11px;font:inherit;font-size:var(--fs-footnote);outline:none}
+.stg-input:focus{border-color:var(--accent)}
+.stg-check{display:flex;align-items:flex-start;gap:8px;margin-top:12px;font-size:var(--fs-caption);
+  line-height:1.6;color:rgb(var(--ink)/.55);cursor:pointer}
+.stg-check input{margin-top:2px;accent-color:var(--accent)}
+.stg-dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+
+/* 危险动作（清空记忆）：红字描边，hover 才实心 */
+.stg-btn.danger{color:var(--sem-red);border-color:color-mix(in srgb,var(--sem-red) 45%,transparent)}
+.stg-btn.danger:hover:not(:disabled){background:var(--sem-red);border-color:var(--sem-red);color:#fff}
+.stg-mem-list{border-top:1px solid rgb(var(--ink)/.1);border-bottom:1px solid rgb(var(--ink)/.1);margin:6px 0 10px}
+.stg-mem-list div{display:flex;justify-content:space-between;gap:14px;font-size:12px;padding:7px 0;
+  border-bottom:1px solid rgb(var(--ink)/.06)}
+.stg-mem-list div:last-child{border-bottom:0}
+.stg-mem-list span{color:rgb(var(--ink)/.5);flex:none}
+.stg-mem-list b{font-weight:500;text-align:right;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* 确认弹窗里的破坏性动作：实心红，别让人误点成“取消”那一档 */
+.stg-dialog-actions .stg-btn.danger{background:var(--sem-red);border-color:var(--sem-red);color:#fff}
+.stg-dialog-actions .stg-btn.danger:hover:not(:disabled){filter:brightness(1.06)}

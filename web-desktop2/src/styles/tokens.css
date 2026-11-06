@@ -1,0 +1,50 @@
+/* 设计变量（从 template.css 抽出的 token 单点） */
+/* ============ 1. 设计变量（模板的 token 单点） ============ */
+:root{
+  /* 浅色（默认）：纯白实色 */
+  --accent:#2f5fa8;            /* 强调色：墨蓝 */
+  --accent-ink:#ffffff;        /* 实色强调按钮上的文字色 */
+  --app-rgb:255 255 255;       /* 主区底色 */
+  --side-rgb:246 247 249;      /* 侧栏底色（比主区略灰） */
+  --panel-rgb:255 255 255;     /* 浮起表面：卡片 / 输入框 / 弹层 */
+  --ink:26 29 34;              /* 文字主色（RGB 通道，灰阶用 rgb(var(--ink) / 透明度)） */
+  /* 标题衬线：全站唯一一套（别处不要再写 Palatino/Georgia 另一份） */
+  --font-serif:Georgia,"Songti SC","Times New Roman",serif;
+  --r-panel:14px;              /* 面板圆角 */
+  --r-ctl:10px;                /* 控件圆角 */
+  /* 主操作按钮：墨色实心（浅色近黑 / 深色近白）。
+     "主操作"只用在"这一步继续/保存/开始"这类动作上；蓝 accent 留给链接与选中态。 */
+  --btn-primary-bg:rgb(var(--ink) / .92);
+  --btn-primary-ink:rgb(var(--panel-rgb));
+  --btn-primary-bg-hover:rgb(var(--ink));
+  /* 遮罩：所有弹窗共用同一层灰与模糊 */
+  --overlay:rgb(0 0 0 / .42);
+  --overlay-blur:blur(3px);
+  /* 语义色：批改标注体系 */
+  --sem-red:#c2402a;
+  --sem-yellow-ink:#8a6a12;
+  --sem-yellow-bg:#f5e7ad;
+  --sem-green:#2e6b4f;
+  /* ---- 字号：26 个散值 → 6 档（见 design-lab/type-scale-parity-templates.html）----
+     第一遍只把**本来就在档上**的值换成了变量（241 处，零观感变化）。
+     差一点的那些（12.5 / 11.5 / 13.5 / 13 / 14.5 / 10.5 …共 309 处）是第二遍 ——
+     换上去会改变观感，要对着界面调，所以分开做。 */
+  --fs-caption:11px;   /* 说明 / 极小字 */
+  --fs-footnote:12px;  /* 脚注 / 组头 / 次要行 */
+  --fs-body:14px;      /* 正文 / 工具行 / 列表 */
+  --fs-prose:15px;     /* 长文阅读 */
+  --fs-entry:16px;     /* 输入框字号下限 */
+  --fs-title:20px;     /* 页面标题 */
+}
+html[data-panel="dark"]{
+  /* 深色：近黑实色 */
+  --accent:#7097da;
+  --accent-ink:#0b0e14;
+  --app-rgb:12 14 17;
+  --side-rgb:20 23 28;
+  --panel-rgb:26 29 35;
+  --ink:232 234 238;
+  --sem-red:#e06a52;
+  --sem-green:#5cb48c;
+}
+

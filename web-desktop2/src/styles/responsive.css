@@ -1,0 +1,108 @@
+/* 由 template.css 按功能拆出：原文第 1109-1215 行 */
+/* ============ 10. 响应式 ============ */
+@media (max-width:1020px){
+  .ask3.wb-open{grid-template-columns:minmax(0,1fr)}
+  .ask3>aside.ask3-wb{display:none!important}
+  /* 右翼收进全屏画布：放大画布强制单列纵向排，各篇上下排、可滚动，避免两/三栏挤死 */
+  .canvas-cols.n2,.canvas-cols.n3{grid-template-columns:minmax(0,1fr)!important}
+  .canvas-cols{padding:10px;gap:10px}
+  .canvas-toolbar{flex-wrap:wrap;row-gap:6px}
+  .cc-body{min-height:300px}
+}
+
+/* 窄屏全屏处理入口（默认不占位；display:flex 的点亮规则放在本块之后的媒体查询里，
+   否则同优先级的 display:none 会把它盖掉） */
+.narrow-entry{display:none;align-items:center;gap:9px;width:100%;text-align:left;
+  margin:0 0 8px;padding:9px 13px;border-radius:12px;cursor:pointer;font:inherit;
+  border:1px solid color-mix(in srgb,var(--accent) 38%,transparent);
+  background:color-mix(in srgb,var(--accent) 8%,transparent);color:rgb(var(--ink) /.9);
+  transition:background .15s,border-color .15s}
+.narrow-entry:hover{background:color-mix(in srgb,var(--accent) 13%,transparent);
+  border-color:color-mix(in srgb,var(--accent) 55%,transparent)}
+.narrow-entry .ne-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;background:var(--accent)}
+.narrow-entry .ne-dot.ocr{background:var(--sem-yellow,var(--accent))}
+.narrow-entry .ne-dot.review{background:var(--accent)}
+.narrow-entry .ne-dot.fail{background:var(--sem-red)}
+.narrow-entry .ne-dot.run{background:rgb(var(--ink) /.4)}
+.narrow-entry .ne-title{font-size:var(--fs-body);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.narrow-entry .ne-status{font-size:var(--fs-footnote);color:rgb(var(--ink) /.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.narrow-entry .ne-go{margin-left:auto;flex-shrink:0;font-size:var(--fs-footnote);font-weight:600;color:var(--accent)}
+.narrow-entry.tone-fail{border-color:color-mix(in srgb,var(--sem-red) 40%,transparent);
+  background:color-mix(in srgb,var(--sem-red) 8%,transparent)}
+.narrow-entry.tone-fail .ne-go{color:var(--sem-red)}
+/* 点亮规则必须排在上面的 display:none 基础规则之后，窄屏才显示入口条 */
+@media (max-width:1020px){
+  .narrow-entry{display:flex}
+}
+@media (max-width:1100px){
+  .home-grid{grid-template-columns:1fr}
+  .artifacts{grid-template-columns:repeat(2,1fr)}
+  .spec-grid{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .artifacts{grid-template-columns:1fr}
+}
+
+/* ---------- 定稿卡（对话流成果出口，规格同 design-lab dd-card） ---------- */
+.dd-card{border:1px solid rgb(var(--ink) /.1);border-radius:14px;background:rgb(var(--app-rgb));
+  overflow:hidden;max-width:580px;margin:8px 0;box-shadow:0 3px 14px -9px rgb(20 24 30 /.18)}
+.dd-head{display:flex;align-items:center;gap:8px;padding:10px 14px;
+  border-bottom:1px solid rgb(var(--ink) /.07);font-size:var(--fs-body);font-weight:600;
+  background:color-mix(in srgb,var(--sem-green) 6%,transparent)}
+.dd-head .dd-ic{display:inline-flex;color:var(--sem-green)}
+.dd-head .dd-tag{margin-left:auto;font-size:var(--fs-caption);font-weight:600;color:var(--sem-green);
+  background:color-mix(in srgb,var(--sem-green) 13%,transparent);padding:2px 10px;border-radius:99px;white-space:nowrap}
+.dd-body{padding:13px 15px 6px}
+.dd-body h3{font-size:var(--fs-body);margin:0 0 7px}
+.dd-body p{font-family:Georgia,"Times New Roman",serif;font-size:var(--fs-body);line-height:2;color:rgb(var(--ink) /.86);margin:0;white-space:normal}
+.dd-body mark.dd-hl{background:color-mix(in srgb,var(--sem-green) 18%,transparent);color:inherit;
+  padding:0 3px;border-radius:4px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.dd-exp{border-top:1px dashed rgb(var(--ink) /.13);margin:8px 15px 0;padding:8px 0;font-size:var(--fs-footnote)}
+.dd-exp summary{cursor:pointer;color:rgb(var(--ink) /.55);font-weight:500;outline:none;user-select:none}
+.dd-exp summary:hover{color:var(--accent)}
+.dd-exp .xr{margin-top:6px;display:flex;gap:7px;line-height:1.7;color:rgb(var(--ink) /.65)}
+.dd-exp .xr b{flex-shrink:0;color:var(--accent);font-weight:700}
+.dd-exp del{color:rgb(var(--ink) /.45)}
+.dd-actions{display:flex;gap:8px;padding:10px 14px;border-top:1px solid rgb(var(--ink) /.07);
+  background:rgb(var(--ink) /.025);flex-wrap:wrap}
+
+/* ---------- 放大并排画布（方案 C：OCR 核对/批阅时刻全屏） ---------- */
+.ask3.wb-open.canvas-mode{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
+/* conv/wb 根节点带内联 display:flex，必须 !important 才能藏住 */
+.ask3.wb-open.canvas-mode>.ask3-conv,.ask3.wb-open.canvas-mode>.ask3-wb{display:none !important}
+.canvas-stage{display:none;flex-direction:column;min-height:0;min-width:0;overflow:hidden}
+.ask3.wb-open.canvas-mode>.canvas-stage{display:flex}
+.canvas-toolbar{display:flex;align-items:center;gap:8px;padding:9px 14px;flex-shrink:0;
+  border-bottom:1px solid rgb(var(--ink) /.08);background:rgb(var(--app-rgb))}
+.canvas-toolbar .seg{flex-shrink:0}
+.canvas-toolbar .seg button{white-space:nowrap;flex-shrink:0;padding:0 14px}
+.canvas-cols{flex:1;display:grid;gap:10px;padding:12px;min-height:0;overflow:auto}
+.canvas-cols.n1{grid-template-columns:minmax(0,1fr)}
+.canvas-cols.n2{grid-template-columns:repeat(2,minmax(300px,1fr))}
+.canvas-cols.n3{grid-template-columns:repeat(3,minmax(280px,1fr))}
+.cc{display:flex;flex-direction:column;min-height:0;border:1px solid rgb(var(--ink) /.09);
+  border-radius:12px;background:rgb(var(--app-rgb));overflow:hidden}
+.cc.active{border-color:color-mix(in srgb,var(--accent) 50%,transparent);
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 40%,transparent)}
+.cc-head{display:flex;align-items:center;gap:8px;padding:8px 11px;border-bottom:1px solid rgb(var(--ink) /.07);
+  flex-shrink:0;flex-wrap:wrap}
+.cc-head .cct{font-size:var(--fs-footnote);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cc-head .sp{flex:1}
+.cc-body{flex:1;overflow:auto;padding:10px 11px;display:flex;flex-direction:column;gap:9px;min-height:240px}
+.cc-body>.pane{flex:1;min-height:0}
+.canvas-foot{display:flex;align-items:center;gap:10px;padding:8px 14px;flex-shrink:0;
+  border-top:1px solid rgb(var(--ink) /.08);background:rgb(var(--app-rgb))}
+.canvas-foot .muted{font-size:var(--fs-footnote);color:rgb(var(--ink) /.5)}
+
+/* 单篇面板顶部的全屏入口（产品内位置在右翼内，不用设计稿的外边距） */
+.ask3-wb>.back-canvas{margin:8px 10px 0}
+.back-canvas{display:flex;align-items:center;gap:9px;padding:8px 12px;border-radius:10px;width:calc(100% - 20px);
+  border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);
+  background:color-mix(in srgb,var(--accent) 6%,transparent);font-size:var(--fs-footnote);color:var(--accent);text-align:left}
+.back-canvas:hover{background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.back-canvas .sp{flex:1}
+
+/* 并排窄栏里 OCR 改为上图下文堆叠 */
+.ocr-split.compact{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);overflow:auto}
+.ocr-split.compact .ocr-photo-wrap{max-height:220px}
+

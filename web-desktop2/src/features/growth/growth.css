@@ -1,0 +1,72 @@
+/* 由 template.css 按功能拆出：原文第 555-625 行 */
+/* ============ 6.9 成长（原样移植，只换玻璃底） ============ */
+#view-home{padding:24px 26px 0}
+.gr-wrap{max-width:1000px;margin:0 auto;padding-bottom:70px}
+.gr-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.gr-h1{font-size:var(--fs-title);font-weight:600}
+.gr-desc{font-size:var(--fs-footnote);color:rgb(var(--ink) /.55);margin-top:6px;max-width:46em;line-height:1.7}
+.g-card{padding:20px 22px}
+.g-row{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.g-quote{font-size:var(--fs-footnote);color:rgb(var(--ink) /.6);max-width:34em;line-height:1.75}
+.g-klabel{font-size:var(--fs-footnote);font-weight:600;color:rgb(var(--ink) /.62)}
+.g-bignum{margin-top:6px;font-size:clamp(30px, 19.2px + 2vw, 38px);font-weight:600;font-variant-numeric:tabular-nums;
+  display:flex;align-items:baseline;gap:8px}
+.g-bignum span{font-size:var(--fs-body);font-weight:500;color:rgb(var(--ink) /.55)}
+.g-bignum em{font-style:normal;font-size:var(--fs-footnote);color:rgb(var(--ink) /.5)}
+.g-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px}
+.g-chips span{font-size:var(--fs-footnote);padding:3px 10px;border-radius:999px;
+  border:1px solid rgb(var(--ink) /.12);color:rgb(var(--ink) /.72)}
+.g-chips span.dim{color:rgb(var(--ink) /.4);border-style:dashed}
+.g-secrow{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.g-legend{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.g-leg{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;
+  border-radius:999px;font-size:var(--fs-footnote);color:rgb(var(--ink) /.65);border:1px solid rgb(var(--ink) /.12);transition:.15s}
+.g-leg:hover{background:rgb(var(--ink) /.05)}
+.g-leg i{display:inline-block;width:8px;height:8px;border-radius:50%}
+.g-chart{width:100%}
+.g-chart .gl{stroke:rgb(var(--ink) /.08);stroke-width:1}
+.g-chart .ln{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.g-chart .gx{fill:rgb(var(--ink) /.4);font-size:var(--fs-caption);text-anchor:middle}
+.g-meta{font-size:var(--fs-footnote);color:rgb(var(--ink) /.5);margin-top:8px;line-height:1.7}
+.g-trend{color:rgb(var(--ink) /.8)}
+.g-seals{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+.seal{border:1.5px dashed rgb(var(--ink) /.25);border-radius:12px;padding:12px 14px;
+  display:flex;flex-direction:column;gap:4px}
+.seal b{font-size:var(--fs-body);font-weight:600}
+.seal>span{font-size:var(--fs-footnote);color:rgb(var(--ink) /.55)}
+.seal-bar{height:4px;border-radius:3px;background:rgb(var(--ink) /.1);overflow:hidden;margin-top:2px}
+.seal-bar i{display:block;height:100%;background:rgb(var(--ink) /.35);border-radius:3px}
+.seal em{font-style:normal;font-size:var(--fs-caption);color:rgb(var(--ink) /.45);font-variant-numeric:tabular-nums}
+.seal.on{border:1.5px solid var(--accent);background:color-mix(in srgb,var(--accent) 7%,transparent)}
+.seal.on .seal-bar i{background:var(--accent)}
+.seal.on em{color:var(--accent)}
+.g-totals{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tstat{border:1px solid rgb(var(--ink) /.08);border-radius:12px;
+  background:rgb(var(--panel-rgb));padding:12px 14px}
+.tstat .g-klabel{letter-spacing:0}
+.tstat .g-num{margin-top:4px;font-size:var(--fs-title);font-weight:600;font-variant-numeric:tabular-nums}
+.yr-sheet{border-radius:12px;background:#fffdf8;border:1px solid rgb(26 29 34 /.08);
+  box-shadow:0 1px 2px rgb(20 24 30 /.05);padding:28px 30px;color:#23272d}
+.yr-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  border-bottom:1px solid rgb(26 29 34 /.12);padding-bottom:16px}
+.yr-title{font-size:var(--fs-title);font-weight:600;margin-top:6px}
+.yr-seal{width:74px;height:74px;border:2px solid var(--sem-red);border-radius:50%;color:var(--sem-red);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;flex-shrink:0}
+.yr-seal span{font-size:var(--fs-body);font-family:"Ma Shan Zheng","KaiTi","楷体",serif}
+.yr-seal b{font-size:var(--fs-body);font-variant-numeric:tabular-nums}
+.yr-stats{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:16px}
+.yr-stats .cell{border:1px solid rgb(26 29 34 /.1);border-radius:10px;padding:9px 10px}
+.yr-stats .cell .g-klabel{color:#7a8089;letter-spacing:0}
+.yr-stats .cell b{display:block;margin-top:4px;font-size:var(--fs-entry);font-weight:600;font-variant-numeric:tabular-nums}
+.yr{display:flex;align-items:center;gap:10px;padding:9px 0}
+.yr .yl{width:64px;font-size:var(--fs-footnote);color:#7a8089;flex-shrink:0}
+.yr .yv{width:34px;text-align:right;font-size:var(--fs-footnote);color:#7a8089;font-variant-numeric:tabular-nums;flex-shrink:0}
+.yr .yb{flex:1;display:flex;flex-direction:column;gap:3px}
+.yr .y1,.yr .y2{display:block;height:4px;border-radius:3px}
+.yr .y1{background:rgb(26 29 34 /.15)}
+.yr .y2{background:#2f5fa8}
+.yr .yd{width:44px;text-align:right;font-size:var(--fs-footnote);font-weight:600;color:#2f5fa8;flex-shrink:0}
+.yr-foot{margin-top:18px;font-size:var(--fs-footnote);color:#7a8089}
+.yr-actions{display:flex;align-items:center;gap:10px;margin-top:12px}
+.yr-actions .g-meta{margin:0}
+

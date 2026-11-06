@@ -1,0 +1,290 @@
+{
+  "version": 1,
+  "description": "掌握度复测出题/判题金标（第七棒）。与 golden/cases.json（管批改准不准）分工：本集管『到期复测时出题合不合规、判三档对不对』。只收 6 个受控硬语法点的客观题（语法填空 fill / 改错 correct），答案封闭、可核验，不收开放写作题。每题给：账本里的历史错句种子 seed_wrong/seed_right、题干 prompt、标准答案与可接受等价写法 acceptable_answers、考点 point_zh，以及三条判题判例 judgements（首次独立做对 independent / 提示后做对 hinted / 提示后仍错 wrong）。判分口径见 tests/tools/mastery_review_eval.py。",
+  "verdict_semantics": {
+    "independent": "没给过提示、首次作答就正确（等价写法也算对）",
+    "hinted": "确实给过提示之后才做对",
+    "wrong": "给过提示仍错或放弃（此时讲解并给标准答案）",
+    "give_hint": "首次答错，不落账，先给提示让他再试一次（因此金标落账判例里不出现『未给提示+答错』）"
+  },
+  "codes": [
+    "VERB:TENSE",
+    "MORPH",
+    "NOUN:NUM",
+    "NOUN:INFL",
+    "DET",
+    "SPELL"
+  ],
+  "questions": [
+    {
+      "id": "q01",
+      "error_code": "VERB:TENSE",
+      "type": "fill",
+      "seed_wrong": "Yesterday I go home.",
+      "seed_right": "Yesterday I went home.",
+      "prompt": "用括号中动词的正确形式填空：Yesterday I ___ (go) home.",
+      "acceptable_answers": ["went"],
+      "point_zh": "yesterday 是明确的过去时间，用一般过去时；go 的过去式是不规则变化 went",
+      "judgements": [
+        {"answer": "went", "hint_given": false, "expect": "independent"},
+        {"answer": "went", "hint_given": true, "expect": "hinted"},
+        {"answer": "goed", "hint_given": true, "expect": "wrong"}
+      ]
+    },
+    {
+      "id": "q02",
+      "error_code": "VERB:TENSE",
+      "type": "fill",
+      "seed_wrong": "Look! The children play in the park.",
+      "seed_right": "Look! The children are playing in the park.",
+      "prompt": "用括号中动词的正确形式填空：Look! The children ___ (play) in the park.",
+      "acceptable_answers": ["are playing"],
+      "point_zh": "Look! 提示动作正在发生，用现在进行时 be + doing，主语 children 是复数，be 用 are",
+      "judgements": [
+        {"answer": "are playing", "hint_given": false, "expect": "independent"},
+        {"answer": "are playing", "hint_given": true, "expect": "hinted"},
+        {"answer": "play", "hint_given": true, "expect": "wrong"}
+      ]
+    },
+    {
+      "id": "q03",
+      "error_code": "VERB:TENSE",
+      "type": "fill",
+      "seed_wrong": "Tomorrow we visit the museum.",
+      "seed_right": "Tomorrow we will visit the museum.",
+      "prompt": "用括号中动词的正确形式填空：Tomorrow we ___ (visit) the museum.",
+      "acceptable_answers": ["will visit", "shall visit", "are going to visit", "are visiting"],
+      "point_zh": "tomorrow 是将来时间，可用 will/shall + 动词原形、be going to 或现在进行时表将来，均算对",
+      "judgements": [
+        {"answer": "are going to visit", "hint_given": false, "expect": "independent"},
+        {"answer": "will visit", "hint_given": true, "expect": "hinted"},
+        {"answer": "visited", "hint_given": true, "expect": "wrong"}
+      ]
+    },
+    {
+      "id": "q04",
+      "error_code": "MORPH",
+      "type": "fill",
+      "seed_wrong": "He run faster than everyone else.",
+      "seed_right": "He runs faster than everyone else.",
+      "prompt": "用括号中动词的正确形式填空：He ___ (run) faster than everyone else.",
+      "acceptable_answers": ["runs"],
+      "point_zh": "主语 He 是第三人称单数、陈述习惯用一般现在时，动词加 s：runs",
+      "judgements": [
+        {"answer": "runs", "hint_given": false, "expect": "independent"},
+        {"answer": "runs", "hint_given": true, "expect": "hinted"},
+        {"answer": "run", "hint_given": true, "expect": "wrong"}
+      ]
+    },
+    {
+      "id": "q05",
+      "error_code": "MORPH",
+      "type": "fill",
+      "seed_wrong": "This is the good film I have ever seen.",
+      "seed_right": "This is the best film I have ever seen.",
+      "prompt": "用括号中词的正确形式填空：This is the ___ (good) film I have ever seen.",
+      "acceptable_answers": ["best"],
+      "point_zh": "“I have ever seen”表示在所有看过的电影里比较，用最高级；good 的最高级是不规则变化 best",
+      "judgements": [
+        {"answer": "best", "hint_given": false, "expect": "independent"},
+        {"answer": "best", "hint_given": true, "expect": "hinted"},
+        {"answer": "better", "hint_given": true, "expect": "wrong"}
+      ]
+    },
+    {
+      "id": "q06",
+      "error_code": "MORPH",
+      "type": "fill",
+      "seed_wrong": "She sings very beautiful.",
+      "seed_right": "She sings very beautifully.",
+      "prompt": "用括号中词的正确形式填空：She sings very ___ (beautiful).",
+      "acceptable_answers": ["beautifully"],
+      "point_zh": "修饰动词 sings 要用副词；形容词 beautiful 的副词形式是 beautifully",
+      "judgements": [
+        {"answer": "beautifully", "hint_given": false, "expect": "independent"},
+        {"answer": "beautifully", "hint_given": true, "expect": "hinted"},
+        {"answer": "beautiful", "hint_given": true, "expect": "wrong"}
+      ]
+    },
+    {
+      "id": "q07",
+      "error_code": "NOUN:NUM",
+      "type": "fill",
+      "seed_wrong": "I have two cat at home.",
+      "seed_right": "I have two cats at home.",
+      "prompt": "用括号中名词的正确形式填空：I have two ___ (cat) at home.",
+      "acceptable_answers": ["cats"],
+      "point_zh": "数词 two 后接可数名词复数，cat 的复数是规则变化 cats",
+      "judgements": [
+        {"answer": "cats", "hint_given": false, "expect": "independent"},
+        {"answer": "cats", "hint_given": true, "expect": "hinted"},
+        {"answer": "cat", "hint_given": true, "expect": "wrong"}
+      ]
+    },
+    {
+      "id": "q08",
+      "error_code": "NOUN:NUM",
+      "type": "fill",
+      "seed_wrong": "There are five woman over there.",
+      "seed_right": "There are five women over there.",
+      "prompt": "用括号中名词的正确形式填空：There are five ___ (woman) over there.",
+      "acceptable_answers": ["women"],
+      "point_zh": "数词 five 后用复数；woman 的复数是不规则变化 women（不是 womans）",
+      "judgements": [
+        {"answer": "women", "hint_given": false, "expect": "independent"},
+        {"answer": "women", "hint_given": true, "expect": "hinted"},
+        {"answer": "womans", "hint_given": true, "expect": "wrong"}
+      ]
+    },
+    {
+      "id": "q09",
+      "error_code": "NOUN:NUM",
+      "type": "fill",
+      "seed_wrong": "He bought three book yesterday.",
+      "seed_right": "He bought three books yesterday.",
+      "prompt": "用括号中名词的正确形式填空：He bought three ___ (book) yesterday.",
+      "acceptable_answers": ["books"],
+      "point_zh": "数词 three 后接可数名词复数 books",
+      "judgements": [
+        {"answer": "books", "hint_given": false, "expect": "independent"},
+        {"answer": "books", "hint_given": true, "expect": "hinted"},
+        {"answer": "book", "hint_given": true, "expect": "wrong"}
+      ]
+    },
+    {
+      "id": "q10",
+      "error_code": "NOUN:INFL",
+      "type": "correct",
+      "seed_wrong": "We can learn many knowledges from books.",
+      "seed_right": "We can learn much knowledge from books.",
+      "prompt": "找出并改正下面句子中的错误：We can learn many knowledges from books.",
+      "acceptable_answers": ["knowledge"],
+      "point_zh": "knowledge（知识）是不可数名词，没有复数 knowledges；与 much 搭配，不与 many 连用",
+      "judgements": [
+        {"answer": "knowledge", "hint_given": false, "expect": "independent"},
+        {"answer": "knowledge", "hint_given": true, "expect": "hinted"},
+        {"answer": "knowledges", "hint_given": true, "expect": "wrong"}
+      ]
+    },
+    {
+      "id": "q11",
+      "error_code": "NOUN:INFL",
+      "type": "correct",
+      "seed_wrong": "Can you give me some informations?",
+      "seed_right": "Can you give me some information?",
+      "prompt": "找出并改正下面句子中的错误：Can you give me some informations?",
+      "acceptable_answers": ["information"],
+      "point_zh": "information（信息）是不可数名词，没有复数 informations；some information 即可",
+      "judgements": [
+        {"answer": "information", "hint_given": false, "expect": "independent"},
+        {"answer": "information", "hint_given": true, "expect": "hinted"},
+        {"answer": "informations", "hint_given": true, "expect": "wrong"}
+      ]
+    },
+    {
+      "id": "q12",
+      "error_code": "NOUN:INFL",
+      "type": "correct",
+      "seed_wrong": "He gave me some good advices.",
+      "seed_right": "He gave me some good advice.",
+      "prompt": "找出并改正下面句子中的错误：He gave me some good advices.",
+      "acceptable_answers": ["advice"],
+      "point_zh": "advice（建议）是不可数名词，没有复数 advices；一条建议是 a piece of advice",
+      "judgements": [
+        {"answer": "advice", "hint_given": false, "expect": "independent"},
+        {"answer": "advice", "hint_given": true, "expect": "hinted"},
+        {"answer": "advices", "hint_given": true, "expect": "wrong"}
+      ]
+    },
+    {
+      "id": "q13",
+      "error_code": "SPELL",
+      "type": "correct",
+      "seed_wrong": "I recieve your letter.",
+      "seed_right": "I receive your letter.",
+      "prompt": "找出并改正下面句子中的拼写错误：I recieve your letter.",
+      "acceptable_answers": ["receive"],
+      "point_zh": "receive 的拼写是 i 在 e 前（re-ceive），常见误拼 recieve",
+      "judgements": [
+        {"answer": "receive", "hint_given": false, "expect": "independent"},
+        {"answer": "receive", "hint_given": true, "expect": "hinted"},
+        {"answer": "recieve", "hint_given": true, "expect": "wrong"}
+      ]
+    },
+    {
+      "id": "q14",
+      "error_code": "SPELL",
+      "type": "correct",
+      "seed_wrong": "She is my best freind.",
+      "seed_right": "She is my best friend.",
+      "prompt": "找出并改正下面句子中的拼写错误：She is my best freind.",
+      "acceptable_answers": ["friend"],
+      "point_zh": "friend 的拼写是 fri-end，常见误拼 freind",
+      "judgements": [
+        {"answer": "friend", "hint_given": false, "expect": "independent"},
+        {"answer": "friend", "hint_given": true, "expect": "hinted"},
+        {"answer": "freind", "hint_given": true, "expect": "wrong"}
+      ]
+    },
+    {
+      "id": "q15",
+      "error_code": "SPELL",
+      "type": "correct",
+      "seed_wrong": "Please write down your adres.",
+      "seed_right": "Please write down your address.",
+      "prompt": "找出并改正下面句子中的拼写错误：Please write down your adres.",
+      "acceptable_answers": ["address"],
+      "point_zh": "address（地址）要双写 d，常见漏写 adres",
+      "judgements": [
+        {"answer": "address", "hint_given": false, "expect": "independent"},
+        {"answer": "address", "hint_given": true, "expect": "hinted"},
+        {"answer": "adres", "hint_given": true, "expect": "wrong"}
+      ]
+    },
+    {
+      "id": "q16",
+      "error_code": "DET",
+      "type": "fill",
+      "seed_wrong": "She is a honest girl.",
+      "seed_right": "She is an honest girl.",
+      "prompt": "在空格处填入恰当的冠词（a / an / the，不需要冠词则填 /）：She is ___ honest girl.",
+      "acceptable_answers": ["an"],
+      "point_zh": "honest 的 h 不发音、以元音音素 /ɒ/ 开头，要用 an 而不是 a（看发音不看首字母）",
+      "judgements": [
+        {"answer": "an", "hint_given": false, "expect": "independent"},
+        {"answer": "an", "hint_given": true, "expect": "hinted"},
+        {"answer": "a", "hint_given": true, "expect": "wrong"}
+      ]
+    },
+    {
+      "id": "q17",
+      "error_code": "DET",
+      "type": "fill",
+      "seed_wrong": "I saw an UFO in the sky last night.",
+      "seed_right": "I saw a UFO in the sky last night.",
+      "prompt": "在空格处填入恰当的冠词（a / an / the，不需要冠词则填 /）：I saw ___ UFO in the sky last night.",
+      "acceptable_answers": ["a"],
+      "point_zh": "UFO 读 /ˌjuːefˈəʊ/，以辅音音素 /j/ 开头，要用 a 而不是 an（看发音不看首字母）",
+      "judgements": [
+        {"answer": "a", "hint_given": false, "expect": "independent"},
+        {"answer": "a", "hint_given": true, "expect": "hinted"},
+        {"answer": "an", "hint_given": true, "expect": "wrong"}
+      ]
+    },
+    {
+      "id": "q18",
+      "error_code": "DET",
+      "type": "fill",
+      "seed_wrong": "I bought a umbrella yesterday.",
+      "seed_right": "I bought an umbrella yesterday.",
+      "prompt": "在空格处填入恰当的冠词（a / an / the，不需要冠词则填 /）：I bought ___ umbrella yesterday.",
+      "acceptable_answers": ["an"],
+      "point_zh": "umbrella 以元音音素 /ʌ/ 开头，要用 an 而不是 a",
+      "judgements": [
+        {"answer": "an", "hint_given": false, "expect": "independent"},
+        {"answer": "an", "hint_given": true, "expect": "hinted"},
+        {"answer": "a", "hint_given": true, "expect": "wrong"}
+      ]
+    }
+  ]
+}

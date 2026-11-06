@@ -1,0 +1,63 @@
+{
+  "description": "grade_text 金标集。来源：旧项目 essay_basic 教师必抓 + 三轮模型实测的 38 句学习者语料。匹配口径见 golden_eval.py（normalize 后双向子串）。",
+  "matching": "must_catch 中的片段与某条 detection.original 在 normalize（小写、去非字母数字）后互为子串即算命中。",
+  "buckets": {
+    "hard": "拼写/语法等确定错误，must_catch 应被命中",
+    "chinglish": "中式英语/不地道，must_catch 应被命中",
+    "wordy": "冗余，must_catch 应被命中",
+    "soft": "语法可接受/看尺度：允许 suggestion，但报 error 算过度批改",
+    "ok": "地道且语法正确（含高级语法陷阱）：任何 detection 都算误报"
+  },
+  "cases": [
+    {
+      "id": "g01",
+      "text": "I is a student. I very like apple. Because it is delicious so I eat it every day. He don't like banana.",
+      "bucket": "hard",
+      "must_catch": ["I is", "very like", "don't", "so"],
+      "note": "旧项目 essay_basic，多句整篇，教师列出的必抓点"
+    },
+
+    {"id": "g02", "text": "I go to school yesterday.", "bucket": "hard", "must_catch": ["go to school"], "note": "时态：go→went"},
+    {"id": "g03", "text": "He like playing football.", "bucket": "hard", "must_catch": ["like"], "note": "三单：like→likes（锚点取最小公共词 like）"},
+    {"id": "g04", "text": "I have two cat.", "bucket": "hard", "must_catch": ["two cat"], "note": "单复数：cat→cats"},
+    {"id": "g05", "text": "She is a honest girl.", "bucket": "hard", "must_catch": ["a honest"], "note": "冠词：a→an"},
+    {"id": "g06", "text": "I recieve your letter.", "bucket": "hard", "must_catch": ["recieve"], "note": "拼写：receive（本地拼写库也应抓）"},
+    {"id": "g07", "text": "Please open the light.", "bucket": "chinglish", "must_catch": ["open the light"], "note": "搭配：turn on the light"},
+    {"id": "g08", "text": "You should eat medicine on time.", "bucket": "chinglish", "must_catch": ["eat medicine"], "note": "搭配：take medicine"},
+    {"id": "g09", "text": "I very like this movie.", "bucket": "chinglish", "must_catch": ["very like"], "note": "very 不能这样修饰动词"},
+    {"id": "g10", "text": "Although he is poor, but he is happy.", "bucket": "chinglish", "must_catch": ["but he is happy"], "note": "although/but 连用，去掉 but"},
+    {"id": "g11", "text": "Because I was ill, so I didn't go to school.", "bucket": "chinglish", "must_catch": ["so"], "note": "because/so 连用（锚点取最小公共词 so，模型取前半/后半都算命中）"},
+    {"id": "g12", "text": "I am very agree with you.", "bucket": "chinglish", "must_catch": ["very agree"], "note": "agree 是动词，不加 be/very"},
+    {"id": "g13", "text": "We can learn many knowledges from books.", "bucket": "chinglish", "must_catch": ["knowledges"], "note": "knowledge 不可数"},
+    {"id": "g14", "text": "The street was people mountain people sea.", "bucket": "chinglish", "must_catch": ["people mountain people sea"], "note": "人山人海直译"},
+    {"id": "g15", "text": "My hometown took place great changes.", "bucket": "chinglish", "must_catch": ["took place"], "note": "句式：great changes took place in..."},
+    {"id": "g16", "text": "In my opinion, I think we should start now.", "bucket": "wordy", "must_catch": ["I think"], "note": "观点重复，去掉其一"},
+
+    {"id": "g17", "text": "I'd been looking forward to the trip, and it turned out even better than I expected.", "bucket": "ok", "must_catch": [], "note": "地道正确"},
+    {"id": "g18", "text": "Could you tell me where the nearest subway station is?", "bucket": "ok", "must_catch": [], "note": "地道正确"},
+    {"id": "g19", "text": "She has been working on the project since last Monday.", "bucket": "ok", "must_catch": [], "note": "地道正确"},
+
+    {"id": "g20", "text": "My English is poor.", "bucket": "chinglish", "must_catch": ["is poor"], "note": "经典中式：not very good / not fluent"},
+    {"id": "g21", "text": "Can you say it again? I didn't listen clearly.", "bucket": "chinglish", "must_catch": ["listen clearly"], "note": "没听清：didn't catch that"},
+    {"id": "g22", "text": "Studying abroad is a good chance to open our eyes.", "bucket": "chinglish", "must_catch": ["open our eyes"], "note": "开阔眼界：broaden our horizons"},
+    {"id": "g23", "text": "The restaurant's environment is very good and the food is delicious.", "bucket": "chinglish", "must_catch": ["environment"], "note": "餐厅环境用 atmosphere"},
+    {"id": "g24", "text": "How to say this word in English?", "bucket": "chinglish", "must_catch": ["How to say"], "note": "完整问句：How do you say..."},
+    {"id": "g25", "text": "His English level is very high.", "bucket": "chinglish", "must_catch": ["English level"], "note": "His English is very good"},
+    {"id": "g26", "text": "We played very happily at the park yesterday.", "bucket": "chinglish", "must_catch": ["very happily"], "note": "had a great time"},
+    {"id": "g27", "text": "With the development of society, more and more people buy cars.", "bucket": "chinglish", "must_catch": ["With the development of society"], "note": "中式套话（难题，pro 复测曾漏）"},
+
+    {"id": "g28", "text": "I have something to do tomorrow, so I can't make it.", "bucket": "soft", "must_catch": [], "note": "基本可接受，不该判 error"},
+    {"id": "g29", "text": "I think it's not a good idea.", "bucket": "soft", "must_catch": [], "note": "否定前移更自然，但原句不算错"},
+    {"id": "g30", "text": "No need to be so polite.", "bucket": "soft", "must_catch": [], "note": "看语境可接受，不该判 error"},
+    {"id": "g31", "text": "Please give me some advice on how to learn English well.", "bucket": "soft", "must_catch": [], "note": "基本正确，不该判 error"},
+    {"id": "g32", "text": "I go to school by bike every day. It is very convenient.", "bucket": "soft", "must_catch": [], "note": "地道，不该改"},
+    {"id": "g33", "text": "Don't worry, let me help you to solve this problem.", "bucket": "soft", "must_catch": [], "note": "help sb (to) do 都对，不该判错"},
+
+    {"id": "g34", "text": "Long time no see! How have you been?", "bucket": "ok", "must_catch": [], "note": "已进入英语，地道"},
+    {"id": "g35", "text": "I'd appreciate it if you could let me know by Friday.", "bucket": "ok", "must_catch": [], "note": "地道礼貌句式"},
+    {"id": "g36", "text": "That movie was so good I watched it twice.", "bucket": "ok", "must_catch": [], "note": "口语省略 that，正确"},
+    {"id": "g37", "text": "There's no way I'm going to finish this on time.", "bucket": "ok", "must_catch": [], "note": "地道非正式"},
+    {"id": "g38", "text": "She suggested that he see a doctor right away.", "bucket": "ok", "must_catch": [], "note": "虚拟语气原形 see，勿改 sees"},
+    {"id": "g39", "text": "I'm used to getting up early these days.", "bucket": "ok", "must_catch": [], "note": "be used to + doing，正确，勿改 get up"}
+  ]
+}

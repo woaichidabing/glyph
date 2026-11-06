@@ -1,0 +1,31 @@
+/* 由 template.css 按功能拆出：原文第 1587-1616 行 */
+/* ===== 写作四维评分卡（#36）===== */
+.sc-box{margin:2px 0 4px;padding:10px 12px;border:1px solid rgb(var(--ink) /.1);border-radius:12px;background:rgb(var(--ink) /.03)}
+.sc-head{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.sc-title{font-size:var(--fs-footnote);font-weight:650;color:rgb(var(--ink) /.72)}
+.sc-overall{margin-left:auto;font-size:var(--fs-footnote);font-weight:700;padding:2px 10px;border-radius:999px;background:rgb(var(--ink) /.07);color:rgb(var(--ink) /.72);font-variant-numeric:tabular-nums}
+.sc-overall small{font-weight:500;opacity:.55;font-size:var(--fs-caption)}
+.sc-overall[data-band="high"]{color:rgb(18 132 84);background:rgb(22 150 92 /.13)}
+.sc-overall[data-band="mid"]{color:rgb(176 128 8);background:rgb(210 160 25 /.15)}
+.sc-overall[data-band="low"]{color:rgb(198 104 12);background:rgb(228 128 20 /.15)}
+.sc-overall[data-band="bad"]{color:rgb(196 52 52);background:rgb(214 64 64 /.13)}
+.sc-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px 16px}
+.sc-cell-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px}
+.sc-label{font-size:var(--fs-footnote);color:rgb(var(--ink) /.6)}
+.sc-num{font-size:var(--fs-prose);font-weight:700;font-variant-numeric:tabular-nums;color:rgb(var(--ink) /.4)}
+.sc-cell[data-band="high"] .sc-num{color:rgb(18 132 84)}
+.sc-cell[data-band="mid"] .sc-num{color:rgb(176 128 8)}
+.sc-cell[data-band="low"] .sc-num{color:rgb(198 104 12)}
+.sc-cell[data-band="bad"] .sc-num{color:rgb(196 52 52)}
+.sc-bar{height:5px;border-radius:99px;background:rgb(var(--ink) /.09);overflow:hidden}
+.sc-bar i{display:block;height:100%;border-radius:99px;background:rgb(var(--ink) /.3)}
+.sc-cell[data-band="high"] .sc-bar i{background:rgb(22 150 92)}
+.sc-cell[data-band="mid"] .sc-bar i{background:rgb(210 160 25)}
+.sc-cell[data-band="low"] .sc-bar i{background:rgb(228 128 20)}
+.sc-cell[data-band="bad"] .sc-bar i{background:rgb(214 64 64)}
+.sc-notes{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:5px}
+.sc-notes li{font-size:var(--fs-footnote);line-height:1.62;color:rgb(var(--ink) /.66);display:flex;gap:7px}
+.sc-notes b{flex:none;font-weight:650;color:rgb(var(--ink) /.82)}
+.sc-notes li span{min-width:0}
+@media (max-width:560px){.sc-grid{grid-template-columns:1fr 1fr;gap:8px 12px}}
+

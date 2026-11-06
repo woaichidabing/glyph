@@ -1,0 +1,71 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "glyph"
+version = "0.1.0"
+description = "Glyph: 本地运行、业务无关的 Tool-use Agent 运行时（服务英语学习者）"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.6",
+    "jsonschema>=4.21",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.5",
+]
+# 真实千问适配层才需要；内核与默认测试不安装、不联网
+qwen = [
+    "openai>=1.40",
+]
+# 文本批改工具 grade_text：本地拼写库（离线）+ openai 客户端（批改模型）
+grade = [
+    "pyspellchecker>=0.8",
+    "openai>=1.40",
+]
+# 测试用 web 前端（FastAPI + SSE 包装 AgentLoop）；非生产交付形态，仅本地调试
+# httpx2 在这里显式声明，**不能只靠 openai 顺带带进来**：provider/discover.py 直接
+# `import httpx2`，而 provider 经 provider/__init__.py 静态导出、web/server.py 顶层 import，
+# 一旦上游 openai 不再依赖 httpx2（或换名），整个后端会在 import 阶段直接崩，而不是某个功能失效。
+# 2026-10-14 实测：屏蔽 httpx2 后 web.server 无法 import、19 个测试文件收集失败。
+web = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.27",
+    "python-multipart>=0.0.9",
+    "httpx2>=2.12",
+]
+# 题库导入（卷子 PDF/Word → 拆解成题卡）：纯本地提取文字，不调模型
+quiz-import = [
+    "pymupdf>=1.24",
+    "python-docx>=1.1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/glyph"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+# 项目路径含中文，editable 安装生成的 .pth 会被中文版 Windows 以 GBK 误读而使
+# 解释器启动崩溃；因此不做 editable 安装，统一由 pytest 把 src 加入导入路径。
+pythonpath = ["src"]
+# 默认不跑联网冒烟：显式 -m integration 时命令行 -m 覆盖此设置
+addopts = "-ra -m 'not integration'"
+markers = [
+    "integration: 真实调用千问 API 的冒烟测试，默认跳过；需显式 -m integration 且配置 DASHSCOPE_API_KEY",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC"]
+
+[tool.ruff.format]
+quote-style = "double"

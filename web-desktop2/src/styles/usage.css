@@ -1,0 +1,84 @@
+/* ============================================================
+   用量可见（今天新加的三块界面）—— 单独一个文件，不放进 template.css
+   ------------------------------------------------------------
+   为什么单开：2026-10-12 这几段原本写在 template.css 里，被并发写入覆盖过一次
+   （别人保存旧缓冲区，把他自己新增的行写进去、把我的抹掉）。
+   项目本来就有"按功能分 CSS"的先例（reading-studio.css），跟着走就不会再被误伤。
+   三块内容：
+     1) 发送区用量状态条 + "这一轮没省到"那一句（对话页）
+     2) 设置 · 用量与花费面板
+     3) 上下文用量面板（点发送区那颗环打开）
+   ============================================================ */
+
+/* ---------- 1. 用量状态条（发送区正下方一行）与"没省到"那一句 ----------
+   平时只有状态条这一行；只有某一轮没省到时，才在那条回答下面补一句解释。
+   命中缓存的部分平台按标准价 2 折计费，所以"省了多少"是按钱算的（口径单点在
+   adapters/usage.ts，前端不各写一份）。 */
+.ubar{display:flex;align-items:center;gap:14px;padding:7px 4px 2px;font-size:var(--fs-footnote);
+  color:rgb(var(--ink) /.45);font-variant-numeric:tabular-nums;flex-wrap:wrap}
+.ubar .ub-seg{display:inline-flex;align-items:center;gap:5px}
+.ubar b{font-weight:650;color:var(--accent)}
+.ubar .ub-sub{color:rgb(var(--ink) /.34)}
+.ubar .ub-ic{width:13px;height:13px;opacity:.6;flex:none}
+.ubar .ub-dot{width:1px;height:10px;background:rgb(var(--ink) /.14)}
+.ub-miss{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:var(--fs-footnote);
+  color:var(--sem-yellow-ink);line-height:1.6}
+.ub-miss .ub-miss-d{width:5px;height:5px;border-radius:50%;background:var(--sem-yellow-ink);flex:none}
+.ub-miss .ub-miss-q{color:rgb(var(--ink) /.4)}
+
+/* ---------- 2. 设置 · 用量与花费 ---------- */
+.us-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.us-card{padding:11px 12px;border-radius:11px;border:1px solid rgb(var(--ink) /.10);
+  background:rgb(var(--app-rgb))}
+.us-card .us-k{font-size:var(--fs-caption);color:rgb(var(--ink) /.45)}
+.us-card .us-v{font-size:var(--fs-title);font-weight:650;margin-top:4px;font-variant-numeric:tabular-nums}
+.us-card .us-s{font-size:var(--fs-caption);color:rgb(var(--ink) /.45);margin-top:3px}
+.us-chart{margin-top:14px}
+.us-bars{display:flex;align-items:flex-end;gap:5px;height:78px}
+.us-bar{flex:1;position:relative;height:100%;display:block}
+.us-bar i{position:absolute;left:0;right:0;bottom:0;border-radius:4px 4px 2px 2px;display:block}
+.us-bar .us-bar-total{background:color-mix(in srgb,var(--accent) 22%,transparent)}
+.us-bar .us-bar-cached{background:var(--accent)}
+.us-axis{display:flex;gap:5px;margin-top:6px}
+.us-axis em{flex:1;text-align:center;font-size:var(--fs-caption);font-style:normal;color:rgb(var(--ink) /.4)}
+.us-note{margin-top:12px;font-size:var(--fs-footnote);line-height:1.8;color:rgb(var(--ink) /.45)}
+
+/* ---------- 3. 上下文用量面板（点发送区那颗环打开） ----------
+   配色：一条蓝色阶。深浅 = 这块内容有多"固定"（每轮都发的更深）：
+   系统提示词最深（每轮原样发、最该砍）→ 工具定义中间 → 对话最浅（每轮都在变、砍不动）。
+   深色主题下反过来：越固定越亮，否则深底上会把意思读反。 */
+:root{
+  --ctx-ramp-1:#2b4f8e; --ctx-ramp-2:#4a7cc4; --ctx-ramp-3:#a9bedb;
+  --ctx-track:rgb(var(--ink) /.09);
+}
+html[data-panel="dark"]{
+  --ctx-ramp-1:#8fb4f0; --ctx-ramp-2:#5b87d0; --ctx-ramp-3:#39496a;
+  --ctx-track:rgb(var(--ink) /.12);
+}
+/* 宽度给上下文这一档自己的（模型名单那档仍是 296px）；padding 交给面板自己，
+   免得零内边距让内容贴着卡片边（这就是"特别挤"的主因）。 */
+/* max-height + 滚动是兜底：万一"向上/向下"判错了，也不至于被视口切掉半截 */
+.bp-sheet-ctx{width:264px;padding:0;max-height:calc(100vh - 24px);overflow-y:auto}
+.ctx-panel{display:block;padding:13px 16px 14px;font-size:var(--fs-footnote)}
+.ctx-h{display:flex;align-items:center;gap:9px}
+.ctx-lb{font-size:var(--fs-body);font-weight:650;color:rgb(var(--ink) /.9)}
+.ctx-vl{margin-left:auto;font-size:var(--fs-body);color:rgb(var(--ink) /.55);font-variant-numeric:tabular-nums}
+.ctx-vl b{color:rgb(var(--ink) /.92);font-weight:600}
+.ctx-pct{font-size:var(--fs-body);font-weight:650;color:var(--accent);font-variant-numeric:tabular-nums}
+.ctx-cv{color:rgb(var(--ink) /.26);font-size:var(--fs-body);line-height:1}
+.ctx-bar{height:8px;border-radius:999px;background:var(--ctx-track);overflow:hidden;margin-top:11px;display:flex}
+/* min-width：5.3% 这种小占比也要看得见，否则那根条等于没画 */
+.ctx-bar i{display:block;height:100%;min-width:5px}
+.ctx-top{background:var(--ctx-ramp-2)}
+.ctx-div{height:1px;background:rgb(var(--ink) /.1);margin:13px 0}
+.ctx-row{display:flex;align-items:baseline;gap:8px;padding:5px 0;font-variant-numeric:tabular-nums}
+.ctx-row .ctx-name{font-size:var(--fs-footnote);color:rgb(var(--ink) /.82)}
+.ctx-row.cut .ctx-name{font-weight:600}
+.ctx-row b{margin-left:auto;font-weight:400;font-size:var(--fs-footnote);color:rgb(var(--ink) /.48)}
+/* 行首小色块与条上的分段一一对应——没有它，那根条就只是装饰 */
+.ctx-sw{width:8px;height:8px;border-radius:2px;display:inline-block;margin-right:8px;flex:none}
+.ctx-bar i.t0,.ctx-sw.t0{background:var(--ctx-ramp-1)}
+.ctx-bar i.t1,.ctx-sw.t1{background:var(--ctx-ramp-2)}
+.ctx-bar i.t2,.ctx-sw.t2{background:var(--ctx-ramp-3)}
+.ctx-empty{color:rgb(var(--ink) /.4)}
+.ctx-loading{display:block;padding:8px 2px;font-size:var(--fs-footnote);color:rgb(var(--ink) /.45)}

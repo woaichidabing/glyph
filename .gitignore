@@ -1,0 +1,52 @@
+# Python 运行产物
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+.pytest_cache/
+.pytest_tmp/
+.pt_tmp/
+.ruff_cache/
+
+# 密钥（.env.example 可入库，真 key 不入库）
+.env
+
+# 前端依赖与构建产物
+web-desktop/node_modules/
+web-desktop/dist/
+
+# 大数据：词典原始表 66MB / 词典库 12.5MB
+# 2026-10-06 决策变更：词典库改为入库（新环境免重建，代码直接读它），
+# 原始 csv 仍不入库（体积大，需要时用 scripts/build_dict_db.py 从它重建词典库）
+data/*.csv
+data/*.db
+!data/dict.db
+
+# 运行日志
+*.log
+*.log.err
+
+# 工具产物
+.impeccable/
+.zcode/
+.zcodeignore
+
+# 设计预览截图（源文件保留，截图可随时重新生成）
+**/_shots/
+
+# ---- 临时产物 / 工作目录（2026-10-16 补）----
+# 注意：.gitignore 不支持行尾注释，说明必须单独一行 —— 踩过一次。
+# %SystemDrive%：cmd 的 %VAR% 语法被 PowerShell 当字面量，误建出来的目录
+%SystemDrive%/
+# pytest 临时目录（原来只忽略了 .pytest_tmp 下划线版，漏了连字符版）
+.pytest-tmp/
+# 界面走查截图
+.dsh-shots/
+# WorkBuddy 的工作目录
+.workbuddy/
+
+# 打包产物
+dist/
+build/
+*.spec
+build-backend.log

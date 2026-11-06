@@ -1,0 +1,80 @@
+/* 由 template.css 按功能拆出：原文第 1866-1944 行 */
+/* ============ 24. 三能力槽（对话 / 看图 / 批改）+ 高级折叠区 + 槽位选择器（2026-10-13） ============ */
+/* 槽位卡：默认档与自定义档同一张皮；名字全部说人话，不出现「子模型」「槽位」这类内部词 */
+.slots{border:1px solid rgb(var(--ink) /.1);border-radius:12px;overflow:hidden}
+.slot{display:flex;align-items:center;gap:12px;padding:13px 15px;border-bottom:1px solid rgb(var(--ink) /.08)}
+.slot:last-child{border-bottom:none}
+.slot .sico{width:34px;height:34px;border-radius:9px;flex:none;display:grid;place-items:center;
+  background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent)}
+.slot .sico svg{width:18px;height:18px}
+.slot .smain{flex:1;min-width:0}
+.slot .sname{font-size:var(--fs-footnote);font-weight:650;display:flex;align-items:center;gap:7px}
+.slot .smodel{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:var(--fs-footnote);
+  color:rgb(var(--ink) /.62);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.slot .smodel .auto{color:var(--sem-green);font-weight:600}
+.slot .sact{flex:none;font-size:var(--fs-footnote);color:var(--accent);padding:5px 10px;border-radius:8px}
+.slot .sact:hover{background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.slot.is-off{opacity:.62}
+.slot .off-why{font-size:var(--fs-footnote);color:rgb(var(--ink) /.5);line-height:1.65;margin-top:6px;
+  border-top:1px dashed rgb(var(--ink) /.12);padding-top:7px}
+/* 来源徽标：内置 / 内置推荐（灰）、自定义 / 已指定（蓝）、固定态用黄 */
+.tag2{font-size:var(--fs-caption);font-weight:600;padding:1.5px 7px;border-radius:6px;flex:none}
+.tag2.builtin{background:rgb(var(--ink) /.08);color:rgb(var(--ink) /.55)}
+.tag2.custom{background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent)}
+.tag2.fixed{background:color-mix(in srgb,var(--sem-yellow-ink) 16%,transparent);color:var(--sem-yellow-ink)}
+
+/* 高级折叠区：看图 / 批改默认收起，头部一句话显示自动适配结果 */
+.adv{border:1px solid rgb(var(--ink) /.1);border-radius:12px;overflow:hidden}
+.adv summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:11px 15px;
+  background:rgb(var(--ink) /.03)}
+.adv summary::-webkit-details-marker{display:none}
+.adv summary:hover{background:rgb(var(--ink) /.055)}
+.adv .adv-t{font-size:var(--fs-footnote);font-weight:650;flex:none}
+.adv .adv-sum{flex:1;min-width:0;font-size:var(--fs-caption);color:rgb(var(--ink) /.5);text-align:right;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+.adv .chev{flex:none;color:rgb(var(--ink) /.4);transition:transform .15s;font-size:var(--fs-body)}
+.adv[open] .chev{transform:rotate(90deg)}
+.adv .adv-body{padding:13px 15px;border-top:1px solid rgb(var(--ink) /.08)}
+
+/* 黄条（回退告知）：只在配置变化后的那一次出现 */
+.warn-card{display:flex;gap:9px;align-items:flex-start;
+  border:1px solid color-mix(in srgb,var(--sem-yellow-ink) 45%,transparent);
+  background:color-mix(in srgb,var(--sem-yellow-ink) 8%,transparent);border-radius:10px;
+  padding:10px 13px;font-size:var(--fs-footnote);line-height:1.7;color:rgb(var(--ink) /.75)}
+.warn-card .wico{width:16px;height:16px;border-radius:50%;background:var(--sem-yellow-ink);
+  color:var(--panel-rgb);display:grid;place-items:center;font-size:var(--fs-caption);font-weight:700;flex:none;margin-top:1px}
+.warn-card b{font-weight:650}
+
+/* 槽位选择器（点「更换」展开）：radio 单选 + 能力小徽标，选之前就知道它行不行 */
+.picker{border:1px solid rgb(var(--ink) /.12);border-radius:12px;margin-top:10px;overflow:hidden}
+.pk-head{padding:11px 14px;border-bottom:1px solid rgb(var(--ink) /.08);display:flex;align-items:center;gap:8px}
+.pk-head b{font-size:var(--fs-body);font-weight:650}
+.pk-head .sub{font-size:var(--fs-footnote);color:rgb(var(--ink) /.5)}
+.pk-rows{max-height:290px;overflow:auto;padding:5px 7px}
+.pkrow{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:8px 9px;
+  border-radius:9px;font-size:var(--fs-footnote);cursor:pointer}
+.pkrow:hover{background:rgb(var(--ink) /.05)}
+.pkrow.sel{background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.pkrow:disabled{opacity:.55;cursor:default}
+.pkrow .radio{width:15px;height:15px;border-radius:50%;border:1.5px solid rgb(var(--ink) /.32);
+  flex:none;display:grid;place-items:center}
+.pkrow.sel .radio{border-color:var(--accent)}
+.pkrow.sel .radio::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.pkrow .mid{flex:1;min-width:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:var(--fs-footnote);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pkrow .mid .auto-word{color:var(--sem-green);font-weight:600;font-family:inherit}
+.pkrow .pcaps{margin-left:auto;display:flex;gap:5px;flex:none}
+.cap{font-size:var(--fs-caption);font-weight:600;padding:1.5px 6px;border-radius:5px;
+  background:rgb(var(--ink) /.07);color:rgb(var(--ink) /.5)}
+.cap.vis{background:color-mix(in srgb,var(--sem-green) 14%,transparent);color:var(--sem-green)}
+.cap.think{background:color-mix(in srgb,var(--accent) 13%,transparent);color:var(--accent)}
+.pk-foot{padding:10px 14px;border-top:1px solid rgb(var(--ink) /.08);font-size:var(--fs-footnote);
+  color:rgb(var(--ink) /.5);line-height:1.7}
+.pk-foot b{color:rgb(var(--ink) /.68)}
+.mgrp2{font-size:var(--fs-caption);font-weight:600;color:rgb(var(--ink) /.5);margin:9px 6px 4px;letter-spacing:.3px}
+.pk-addwrap{padding:10px 14px;border-top:1px solid rgb(var(--ink) /.08)}
+.pk-add{width:100%;height:34px;border-radius:9px;border:1px dashed rgb(var(--ink) /.22);
+  background:rgb(var(--ink) /.03);padding:0 11px;font-size:var(--fs-footnote);outline:none}
+.pk-add:focus{border-color:var(--accent);border-style:solid}
+

@@ -1,0 +1,68 @@
+/* 由 template.css 按功能拆出：原文第 626-692 行 */
+/* ============ 6.12 批改工作台 v2：批注流（原文/批注/定稿一条线，无 tab） ============ */
+.wb-statline{display:flex;align-items:center;gap:6px;margin-top:10px;
+  font-size:var(--fs-footnote);color:rgb(var(--ink) /.55);font-variant-numeric:tabular-nums}
+.wb-statline .sp{flex:1}
+.w-notes{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+/* 内联改稿正文：采纳即时套入，待处理挂波浪线+编号 */
+.il-paper{background:rgb(var(--ink) /.04);border-radius:10px;padding:12px 14px;
+  font-size:var(--fs-prose);line-height:2.3;color:rgb(var(--ink) /.92);white-space:pre-wrap}
+.il-pending{border-bottom:2px wavy var(--sem-red);padding-bottom:1px}
+.il-num{display:inline-flex;align-items:center;justify-content:center;min-width:15px;height:15px;
+  padding:0 4px;margin-left:2px;border-radius:5px;background:var(--sem-red);color:#fff;
+  font-size:var(--fs-caption);font-weight:700;vertical-align:super}
+.il-accepted{white-space:normal}
+.il-accepted .il-old{color:rgb(var(--ink) /.4);text-decoration:line-through;text-decoration-color:var(--sem-red);margin-right:4px}
+.il-accepted .il-new{color:var(--sem-green);font-weight:600;
+  border-bottom:1px solid color-mix(in srgb,var(--sem-green) 55%,transparent);padding-bottom:1px}
+.ncard{border:1px solid rgb(var(--ink) /.09);border-left:3px solid var(--sem-red);border-radius:10px;
+  padding:10px 12px;background:rgb(var(--panel-rgb))}
+.ncard[data-kind="sugg"]{border-left-color:#b8860b}
+.ncard[data-done="adopt"],.ncard[data-done="custom"]{
+  border-left-color:var(--sem-green);background:color-mix(in srgb,var(--sem-green) 6%,transparent)}
+.ncard[data-done="dismiss"]{opacity:.5}
+.ncard.withdrawn{border-left-color:rgb(var(--ink) /.25);background:transparent}
+.ncard.withdrawn .done-line{display:flex;align-items:center;gap:9px;font-size:var(--fs-footnote)}
+.mine-tag{font-size:var(--fs-caption);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);
+  padding:0 7px;border-radius:99px;margin-left:6px}
+.n-top{display:flex;align-items:center;gap:8px}
+.n-top .tag{font-size:var(--fs-caption);font-weight:600;padding:2px 8px;border-radius:999px}
+.n-top .tag.red{background:color-mix(in srgb,var(--sem-red) 13%,transparent);color:var(--sem-red)}
+.n-top .tag.yellow{background:color-mix(in srgb,var(--sem-yellow-bg) 70%,transparent);color:var(--sem-yellow-ink)}
+.n-top .tag.gray{background:rgb(var(--ink) /.08);color:rgb(var(--ink) /.55)}
+.n-top .n-idx{margin-left:auto;font-size:var(--fs-caption);color:rgb(var(--ink) /.4);font-variant-numeric:tabular-nums}
+.n-orig{margin-top:8px;font-size:var(--fs-body);line-height:1.8;color:rgb(var(--ink) /.85);
+  background:rgb(var(--ink) /.04);border-radius:8px;padding:6px 9px}
+.n-fix{margin-top:8px;font-size:var(--fs-body)}
+.n-fix del{color:rgb(var(--ink) /.45)}
+.n-fix ins{text-decoration:none;color:var(--accent);font-weight:500}
+.n-why{margin-top:5px;font-size:var(--fs-footnote);color:rgb(var(--ink) /.55)}
+.n-custom{display:flex;gap:6px;margin-top:8px}
+.n-dismiss{display:flex;gap:6px;margin-top:8px}
+.n-custom input,.n-dismiss input{flex:1;min-width:0;border:1px solid rgb(var(--ink) /.18);border-radius:8px;
+  padding:6px 9px;font-size:var(--fs-footnote);background:rgb(var(--panel-rgb));color:rgb(var(--ink) /.85);outline:none}
+.n-custom input:focus,.n-dismiss input:focus{border-color:var(--accent)}
+.n-ops{display:flex;gap:6px;margin-top:9px;align-items:center}
+.n-ops.checking{color:rgb(var(--ink) /.55)}
+.recheck-banner{margin-top:8px;border-radius:8px;padding:7px 10px;font-size:var(--fs-footnote);line-height:1.7}
+.recheck-banner.upheld{border:1px solid color-mix(in srgb,var(--sem-yellow) 35%,transparent);
+  background:color-mix(in srgb,var(--sem-yellow) 9%,transparent)}
+.recheck-banner.revised{border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);
+  background:color-mix(in srgb,var(--accent) 7%,transparent)}
+.recheck-banner b{margin-right:4px}
+.recheck-err{margin-top:7px;font-size:var(--fs-footnote);color:var(--sem-red)}
+.op{height:26px;padding:0 11px;border-radius:8px;font-size:var(--fs-footnote);
+  border:1px solid rgb(var(--ink) /.14);color:rgb(var(--ink) /.7)}
+.op:hover{background:rgb(var(--ink) /.05)}
+.op.adopt{background:color-mix(in srgb,var(--sem-green) 14%,transparent);
+  color:var(--sem-green);border-color:transparent;font-weight:500}
+.op.done-tag{border:none;background:none;color:var(--sem-green);font-weight:600;padding-left:0}
+.op.link{border:none;color:rgb(var(--ink) /.5);padding-left:4px}
+.op.link:hover{color:var(--accent);background:none}
+/* 驳回后的重审结论（维持 / 撤销 / 改判；模板演示维持） */
+.n-recheck{margin-top:8px;border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);
+  background:color-mix(in srgb,var(--accent) 6%,transparent);border-radius:8px;
+  padding:7px 9px;font-size:var(--fs-footnote);color:rgb(var(--ink) /.75);line-height:1.7}
+.n-recheck b{color:var(--accent);margin-right:6px}
+.w-copy{display:flex;gap:8px;margin-top:12px}
+

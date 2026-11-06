@@ -1,0 +1,180 @@
+/* 收词确认卡（已定 A：页边批注）——只作用于 .wb-card，不碰全局。 */
+.wb-card {
+  --wb-panel: #fcfcf8;
+  --wb-ink: #191a17;
+  --wb-muted: #70736b;
+  --wb-line: #dcded6;
+  --wb-accent: #8c3b2e;
+  --wb-ok: #2e6b4f;
+  --wb-serif: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, "Songti SC", serif;
+  --wb-sans: "Microsoft YaHei UI", "PingFang SC", "Noto Sans SC", system-ui, sans-serif;
+  --wb-mono: "Cascadia Mono", Consolas, "SF Mono", Menlo, monospace;
+
+  width: 100%;
+  max-width: 460px;
+  margin: 10px 0 4px;
+  padding: 14px 15px;
+  border: 1px solid var(--wb-line);
+  border-left: 2px solid var(--wb-accent);
+  border-radius: 2px;
+  background: var(--wb-panel);
+  color: var(--wb-ink);
+  font-family: var(--wb-sans);
+  animation: wb-card-in 0.24s ease-out both;
+}
+
+html[data-panel="dark"] .wb-card {
+  --wb-panel: #1a1e19;
+  --wb-ink: #e8e7df;
+  --wb-muted: #9a9d93;
+  --wb-line: #2a2e28;
+  --wb-accent: #c97a66;
+  --wb-ok: #8fbf9f;
+}
+
+.wb-label {
+  margin-bottom: 6px;
+  color: var(--wb-muted);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+
+.wb-wordrow {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  min-width: 0;
+}
+
+.wb-word {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font: 400 25px/1.15 var(--wb-serif);
+}
+
+.wb-ipa {
+  color: var(--wb-muted);
+  font: 11px var(--wb-mono);
+  white-space: nowrap;
+}
+
+.wb-pos {
+  color: var(--wb-accent);
+  font: italic 12px var(--wb-serif);
+}
+
+.wb-gloss {
+  margin: 3px 0 0;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.wb-why {
+  margin: 10px 0 0;
+  padding-top: 9px;
+  border-top: 1px solid var(--wb-line);
+  color: var(--wb-muted);
+  font-size: 11.5px;
+  line-height: 1.65;
+}
+
+.wb-actions {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 12px;
+}
+
+.wb-primary {
+  padding: 7px 11px;
+  border: 1px solid var(--wb-ink);
+  border-radius: 3px;
+  background: var(--wb-ink);
+  color: var(--wb-panel);
+  font: 12px var(--wb-sans);
+  cursor: pointer;
+}
+
+.wb-primary:hover:not(:disabled) {
+  border-color: var(--wb-accent);
+  background: var(--wb-accent);
+  color: #f7f7f2;
+}
+
+.wb-primary:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.wb-text {
+  padding: 2px 0;
+  border: 0;
+  border-bottom: 1px solid var(--wb-line);
+  background: none;
+  color: var(--wb-muted);
+  font: 11.5px var(--wb-sans);
+  cursor: pointer;
+}
+
+.wb-text:hover:not(:disabled) {
+  border-bottom-color: var(--wb-ink);
+  color: var(--wb-ink);
+}
+
+.wb-text:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.wb-saved {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  color: var(--wb-ink);
+  font-size: 12px;
+}
+
+.wb-check {
+  color: var(--wb-ok);
+  font-size: 13px;
+}
+
+.wb-saved .wb-text {
+  margin-left: 2px;
+}
+
+.wb-skipped {
+  margin-top: 11px;
+  color: var(--wb-muted);
+  font-size: 11.5px;
+  line-height: 1.7;
+}
+
+.wb-skipped .wb-text {
+  margin-left: 4px;
+}
+
+.wb-error {
+  margin: 8px 0 0;
+  color: var(--wb-accent);
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+
+@keyframes wb-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wb-card {
+    animation: none;
+  }
+}

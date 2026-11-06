@@ -1,0 +1,33 @@
+/* 由 template.css 按功能拆出：原文第 911-942 行 */
+/* ============ 7. 档案（次级去处）与规格页 ============ */
+.home-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:12px}
+.resume{display:flex;align-items:center;gap:14px}
+.resume .ic{width:42px;height:42px;border-radius:12px;background:color-mix(in srgb,var(--accent) 13%,transparent);
+  color:var(--accent);display:grid;place-items:center;flex-shrink:0}
+.resume h3{font-size:var(--fs-body);font-weight:600}
+.resume p{font-size:var(--fs-footnote);color:rgb(var(--ink) /.55);margin-top:3px}
+.resume .btn{margin-left:auto}
+.today{display:flex;flex-direction:column}
+.today .stats{display:flex;align-items:center;justify-content:space-between;height:auto;padding:0 2px}
+.stat{text-align:center}
+.stat b{display:block;font-size:var(--fs-title);font-weight:600;font-variant-numeric:tabular-nums}
+.stat span{font-size:var(--fs-footnote);color:rgb(var(--ink) /.5)}
+.today-acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid rgb(var(--ink) /.08)}
+.today-acts .btn{justify-content:center}
+#view-home:not([hidden]){display:block}
+.artifacts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.rs-row{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;font-size:var(--fs-body);cursor:pointer;color:rgb(var(--ink) /.8)}
+.rs-row:hover{background:rgb(var(--ink) /.05)}
+.rs-row time{margin-left:auto;font-size:var(--fs-footnote);color:rgb(var(--ink) /.4);font-variant-numeric:tabular-nums}
+.rs-more{margin-top:auto;padding-top:10px;font-size:var(--fs-footnote);color:var(--accent);align-self:flex-start}
+.rs-more:hover{filter:brightness(1.1)}
+
+.spec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.spec-grid .card h4{font-size:var(--fs-body);font-weight:600;margin-bottom:10px}
+.kv{display:flex;justify-content:space-between;font-size:var(--fs-footnote);padding:5px 0;border-bottom:1px dashed rgb(var(--ink) /.08)}
+.kv:last-child{border:none}
+.kv b{font-weight:500;color:rgb(var(--ink) /.55)}
+.type-demo{font-size:var(--fs-footnote);line-height:2}
+.swatches-demo{display:flex;gap:8px;margin-top:6px}
+.swatch-dot{width:22px;height:22px;border-radius:7px;border:1px solid rgb(var(--ink) /.15)}
+

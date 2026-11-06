@@ -1,0 +1,81 @@
+/* 由 template.css 按功能拆出：原文第 701-780 行 */
+/* ============ 6.15 大脑选择器（照原版 BrainPicker 移植） ============ */
+.bp-anchor{position:relative;display:inline-flex;align-items:center;gap:6px;flex:0 0 auto}
+.bp-ring-btn{width:18px;height:18px;display:grid;place-items:center;padding:0;border:none;
+  border-radius:50%;background:transparent;color:rgb(var(--ink) /.5);cursor:pointer}
+.bp-ring-btn:hover{background:rgb(var(--ink) /.07)}
+.bp-ring-btn svg{display:block}
+.bp-ring-bg{fill:none;stroke:rgb(var(--ink) /.22);stroke-width:2}
+.bp-ring-fg{fill:none;stroke:rgb(var(--ink) /.5);stroke-width:2;stroke-linecap:round;
+  transform:rotate(-90deg);transform-origin:center;transition:stroke-dashoffset .35s,stroke .3s}
+.bp-chip{display:inline-flex;align-items:center;gap:4px;height:30px;padding:0 9px;
+  border:none;border-radius:var(--r-ctl);background:transparent;
+  color:rgb(var(--ink) /.58);font-size:var(--fs-footnote);font-weight:400;line-height:1;cursor:pointer;white-space:nowrap}
+.bp-chip:hover{background:rgb(var(--ink) /.07);color:rgb(var(--ink) /.85)}
+.bp-chip-label{max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bp-chip svg{color:rgb(var(--ink) /.5);flex:0 0 auto}
+.bp-sheet{position:absolute;top:calc(100% + 8px);bottom:auto;right:0;width:320px;
+  /* 外壳 .shell 四边各留 16px，按视口减 24px 会顶到窗口边，所以减 48px */
+  max-width:calc(100vw - 48px);padding:6px;background:rgb(var(--panel-rgb));
+  border:1px solid rgb(var(--ink) /.12);border-radius:14px;
+  box-shadow:0 18px 50px -12px rgb(10 12 16 /.4);z-index:60;
+  /* 小窗口放不下时整块能滚，不被视口切掉（原来这里写 overflow:hidden，
+     把我加的 overflow-y:auto 盖掉了 —— 顺序在后，后写的赢） */
+  max-height:calc(100vh - 40px);overflow-y:auto;overscroll-behavior:contain}
+/* 仅当锚点下方放不下时由 BrainPicker 实测后加 .bp-sheet-up，改为向上弹 */
+.bp-sheet-up{bottom:calc(100% + 8px);top:auto}
+.bp-models,.bp-models{max-height:196px;overflow-y:auto;overscroll-behavior:contain}
+.bp-row{position:relative;display:flex;align-items:center;gap:10px;width:100%;padding:9px 10px;
+  border:none;border-radius:10px;background:transparent;color:rgb(var(--ink) /.92);
+  font-size:var(--fs-body);text-align:left;cursor:pointer;transition:background .12s ease}
+.bp-row:hover{background:rgb(var(--ink) /.06)}
+/* 选中行：左侧一条品牌色竖线 + 名称加粗 —— 9 行里扫一眼就停得住，不用逐行找对勾 */
+.bp-row.on{background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.bp-row.on:hover{background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.bp-row.on::before{content:"";position:absolute;left:2px;top:9px;bottom:9px;width:2px;
+  border-radius:2px;background:var(--accent)}
+.bp-row.on .bp-name{font-weight:600}
+.bp-namecol{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:2px}
+.bp-name{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bp-desc{font-size:var(--fs-caption);line-height:15px;color:rgb(var(--ink) /.34);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bp-logo{flex:0 0 auto;width:18px;height:18px;object-fit:contain;display:block}
+/* 没有官方标志图的型号：品牌色首字母圆徽章（尺寸沿用 .bp-logo） */
+.bp-badge{border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:var(--fs-caption);
+  line-height:1;letter-spacing:0;color:#fff;user-select:none}
+.bp-badge.brand-openai{background:#10a37f}
+.bp-badge.brand-anthropic{background:#d97757}
+.bp-badge.brand-google{background:#4285f4}
+.bp-badge.brand-xai{background:#5b6570}
+.bp-badge.brand-generic{background:rgb(var(--ink) /.18);color:rgb(var(--ink) /.72)}
+.bp-check-ic{flex:0 0 auto;width:16px;height:16px;border-radius:50%;background:var(--accent);
+  color:var(--accent-ink);font-size:10px;font-weight:700;display:grid;place-items:center;
+  line-height:1;text-align:center}
+.bp-check-empty{flex:0 0 auto;width:16px;height:16px}
+.bp-divider{display:block;height:1px;margin:6px 2px;background:rgb(var(--ink) /.08)}
+
+
+
+
+
+.bp-head:hover{background:rgb(var(--ink) /.06)}
+.bp-cm-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.bp-cm-title{display:inline-flex;align-items:center;gap:5px;font-size:var(--fs-caption);font-weight:600;color:rgb(var(--ink) /.85)}
+.bp-cm-max{font-size:var(--fs-caption);font-weight:700;letter-spacing:.08em;padding:1.5px 5px;border-radius:4px;
+  background:var(--accent);color:var(--accent-ink)}
+.bp-switch{width:34px;height:20px;border-radius:999px;background:rgb(var(--ink) /.18);
+  position:relative;transition:.15s;flex-shrink:0;border:none;cursor:pointer}
+.bp-switch::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;
+  background:var(--accent-ink);box-shadow:0 1px 2px rgb(0 0 0 /.3);transition:.15s}
+.bp-switch.is-on{background:var(--accent)}
+.bp-switch.is-on::after{left:16px}
+.bp-cm-meter{display:flex;align-items:center;gap:8px;margin-top:8px}
+.bp-cm-track{flex:1;height:4px;border-radius:3px;background:rgb(var(--ink) /.12);overflow:hidden}
+.bp-cm-fill{display:block;height:100%;border-radius:3px}
+.bp-cm-num{font-size:var(--fs-caption);color:rgb(var(--ink) /.55);font-variant-numeric:tabular-nums;flex-shrink:0}
+.bp-cm-desc{font-size:var(--fs-footnote);color:rgb(var(--ink) /.5);margin-top:7px;line-height:1.7}
+/* 大脑选择器接真：错误条 / 档位列表 / 禁用态 / 胶囊内 logo（切片2） */
+.bp-error{display:block;padding:8px 12px;font-size:var(--fs-footnote);color:var(--sem-red);line-height:1.5}
+
+.bp-chip:disabled{opacity:.55;cursor:not-allowed}
+.bp-chip .bp-logo{width:14px;height:14px}
+

@@ -1,0 +1,84 @@
+{
+  "name": "glyph-desktop",
+  "private": true,
+  "version": "0.1.1",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "desktop": "electron electron/main.cjs",
+    "dist:win": "npm run build && electron-builder --win nsis",
+    "release:win": "npm run build && electron-builder --win nsis"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.3.2",
+    "electron": "^31.7.7",
+    "electron-builder": "^26.18.0",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8",
+    "vitest": "^2.1.9"
+  },
+  "main": "electron/main.cjs",
+  "build": {
+    "appId": "com.glyph.desktop",
+    "productName": "Glyph",
+    "copyright": "Glyph",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "electron/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../dist/glyph-backend.exe",
+        "to": "backend/glyph-backend.exe"
+      },
+      {
+        "from": "dist",
+        "to": "web"
+      },
+      {
+        "from": "build/icon.ico",
+        "to": "icon.ico"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "artifactName": "Glyph-Setup-${version}.exe"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Glyph",
+      "uninstallDisplayName": "Glyph",
+      "deleteAppDataOnUninstall": false
+    }
+  },
+  "productName": "Glyph",
+  "author": "Glyph"
+}

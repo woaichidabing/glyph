@@ -1,0 +1,455 @@
+/* 由 template.css 按功能拆出：原文第 2-395 行 */
+/* ============ 6.5 主区 · Glyph 页 ============ */
+/* 对话列 + 右翼工作台：同一面板内部伸缩，发丝线分隔、无空隙 */
+.ask3{display:grid;grid-template-columns:minmax(0,1fr);gap:0;height:100%}
+.ask3.wb-open{grid-template-columns:minmax(0,1fr) 450px}
+.ask3>aside,.ask3>section{flex-direction:column;min-height:0}
+.ask3>section{display:flex}
+.ask3>aside{display:none}
+.ask3.wb-open>.ask3-wb{display:flex;border-left:1px solid rgb(var(--ink) /.08)}
+
+/* 首屏空态：日期 → 问候 → 今日计划 → 继续上次，**输入区贴底**。
+   问候语用伸缩档（照 Claude 桌面端的 --new-page-greeting-font-size）：窗口一变，
+   字号在 30~38px 之间跟着变。
+   原来这里还有一排五颗快捷入口（.wc-chip，外加 .e-ask 那套覆盖），已删 ——
+   46 条真实用户消息里五个前缀命中 0 次，且其中四项侧栏都有更强的专门页面。 */
+.ask3-welcome{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;
+  align-items:center;justify-content:space-between;padding:24px 32px 22px;gap:18px}
+/* 上半：在"输入框以上那块空间"里垂直居中，再从正中上移 44px（padding 的一半） */
+.wc-top{flex:1 1 auto;width:100%;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:14px;padding-bottom:88px}
+/* 下半：输入区贴底 */
+.wc-foot{flex:0 0 auto;width:100%;display:flex;flex-direction:column;align-items:center}
+.wc-eyebrow{margin:0;text-align:center;font-size:var(--fs-caption);letter-spacing:.10em;
+  color:rgb(var(--ink) /.6);font-variant-numeric:tabular-nums}
+.wc-line{margin:10px 0 0;text-align:center;font-weight:600;letter-spacing:-.015em;
+  font-size:clamp(30px, 19.2px + 2vw, 38px);line-height:1.28;color:rgb(var(--ink) /.88)}
+/* 继续上次：一行、限宽。跟"今日计划"是一伙的——都在回答"从哪开始" */
+.wc-resume{display:flex;align-items:center;gap:8px;width:100%;max-width:380px;
+  padding:10px 14px;border:1px solid rgb(var(--ink) /.1);border-radius:10px;
+  background:rgb(var(--ink) /.02);font:inherit;font-size:var(--fs-body);color:rgb(var(--ink) /.62);
+  cursor:pointer;text-align:left;transition:background .14s ease,border-color .14s ease}
+.wc-resume:hover{background:rgb(var(--ink) /.05);border-color:rgb(var(--ink) /.16)}
+.wc-resume-k{flex:0 0 auto;color:rgb(var(--ink) /.45)}
+.wc-resume-t{flex:1 1 auto;min-width:0;color:rgb(var(--ink) /.85);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wc-resume-w{flex:0 0 auto;font-size:var(--fs-footnote);color:rgb(var(--ink) /.4)}
+/* 今日计划摘要：从"上下两条发丝线"改成**描边圆角块** —— 它是可点的，得长得像能点
+   （无任务时组件整体不渲染） */
+.plan-strip{width:min(680px,100%);display:flex;flex-direction:column;gap:6px;
+  border:1px solid rgb(var(--ink) /.1);border-radius:14px;background:rgb(var(--ink) /.02);
+  padding:9px 14px;transition:border-color .14s ease,background .14s ease}
+.plan-strip:hover{border-color:rgb(var(--ink) /.16);background:rgb(var(--ink) /.04)}
+.ps-top{display:flex;align-items:center;gap:8px;font-size:var(--fs-footnote);color:rgb(var(--ink) /.42)}
+.ps-k{font-size:var(--fs-footnote);font-weight:600;color:rgb(var(--ink) /.62);flex-shrink:0}
+.ps-n{font-weight:500;font-variant-numeric:tabular-nums;color:rgb(var(--ink) /.55)}
+.ps-sp{flex:1}
+.ps-open{margin:0;padding:2px 4px;border:none;border-radius:6px;background:transparent;
+  font-size:var(--fs-footnote);color:rgb(var(--ink) /.42);cursor:pointer;transition:color .14s ease}
+.ps-open:hover{color:var(--accent)}
+.ps-next{margin:0;padding:0;border:none;background:transparent;display:flex;align-items:center;gap:8px;
+  max-width:100%;font-size:var(--fs-body);line-height:1.5;color:rgb(var(--ink) /.8);cursor:pointer;text-align:left}
+.ps-next-t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ps-next:hover .ps-next-t{color:var(--accent)}
+.plan-strip .pd{width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:.9;
+  flex:0 0 auto;align-self:center}
+
+/* 对话时间线（原版 Transcript：助手只有正文，工具一行，用户带附件） */
+.ask3-scroll{flex:1;overflow:auto;padding:18px 22px 10px;display:flex;flex-direction:column;gap:14px;min-height:0}
+/* 滚动列里的每一条都不许被压扁：内容超出时 flex 子项默认 flex-shrink:1，
+   而带 overflow:hidden 的子项自动最小高度算成 0——折叠组头会因此被压成 1px，
+   既看不见也点不动（2026-10-12 联调实测：长会话 + 矮视口必现）。 */
+.ask3-scroll > *{flex-shrink:0}
+.msg{max-width:80%;padding:10px 14px;border-radius:14px;font-size:var(--fs-body);line-height:1.85}
+.msg.user{align-self:flex-end;background:var(--accent);color:var(--accent-ink);
+  border-bottom-right-radius:6px}
+.msg.ai{align-self:stretch;max-width:none;padding:2px 4px;color:rgb(var(--ink) /.92);font-size:var(--fs-prose)}
+.attach{display:inline-flex;align-items:center;gap:5px;font-size:var(--fs-footnote);padding:2px 9px;border-radius:999px;
+  background:rgb(var(--ink) /.08);margin-top:6px;vertical-align:middle}
+/* 用户发的图片：气泡里直接给缩略图（点击新页看大图），不再只显示一个文件名（2026-10-13 真机） */
+.attach-thumb{display:block;margin-top:8px;width:150px;height:100px;border-radius:10px;overflow:hidden;
+  border:1px solid rgb(255 255 255 /.28);background:rgb(0 0 0 /.12)}
+.attach-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+/* 界面动作替用户发出的指令（如 OCR 台确认批改）：居中小灰条，不冒充用户气泡 */
+.user-note{justify-content:center;font-size:var(--fs-footnote)}
+.user-note span{padding:3px 12px;border-radius:999px;background:rgb(var(--ink) /.06)}
+.toolrow{display:flex;align-items:center;gap:8px;font-size:var(--fs-footnote);color:rgb(var(--ink) /.6);padding:0 4px}
+.toolrow .tl{font-size:var(--fs-caption);padding:1.5px 7px;
+  border-radius:999px;background:rgb(var(--ink) /.07);color:rgb(var(--ink) /.6)}
+.toolrow .lk{color:var(--accent)}
+.toolrow .ok{color:var(--sem-green)}
+.finrow{font-size:var(--fs-footnote);color:rgb(var(--ink) /.5);padding:0 4px;display:flex;align-items:center;gap:7px}
+.finrow::before{content:"";width:14px;border-top:1px solid rgb(var(--ink) /.2)}
+.finrow::after{content:"";flex:1;border-top:1px solid rgb(var(--ink) /.2)}
+.thinkrow{display:flex;align-items:center;gap:8px;font-size:var(--fs-footnote);color:rgb(var(--ink) /.5);padding:0 4px}
+.caret{display:inline-block;width:2px;height:1em;background:var(--accent);vertical-align:-2px;
+  margin-left:2px;animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.caret{animation:none}}
+
+/* ===== 折叠组头（思考块 + 工具块共用壳）=====
+   设计稿：docs/design/ask-transcript-render-design.md §2/§4/§5/§7
+   规则：任何状态都不自动展开；整行可点；展开态不被自动折回；语义色只在下面这套类里定 */
+.cgrp{display:flex;flex-direction:column;border:1px solid rgb(var(--ink) /.1);border-radius:var(--r-ctl);
+  background:var(--side);overflow:hidden}
+.cgrp.think{background:transparent;border-style:dashed;border-color:rgb(var(--ink) /.18)}
+/* 失败态：整组红边 + 红字组头（色盲也能读：红色只强化，人话才是主表达） */
+.cgrp.tone-bad{border-color:color-mix(in srgb,var(--sem-red) 34%,transparent);
+  background:color-mix(in srgb,var(--sem-red) 6%,transparent)}
+.cgrp.tone-bad.think{background:transparent;border-style:dashed;
+  border-color:color-mix(in srgb,var(--sem-red) 40%,transparent)}
+.cgrow{display:flex;align-items:center}
+.cghead{flex:1;min-width:0;display:flex;align-items:center;gap:9px;padding:8px 11px;
+  border:0;background:transparent;width:100%;text-align:left;font:inherit;
+  font-size:var(--fs-footnote);color:rgb(var(--ink) /.55);cursor:pointer;user-select:none;
+  transition:background .12s ease,color .12s ease}
+.cghead:hover{background:color-mix(in srgb,var(--accent) 6%,transparent);color:rgb(var(--ink) /.78)}
+.cghead:focus-visible{outline:2px solid color-mix(in srgb,var(--accent) 55%,transparent);
+  outline-offset:-2px;border-radius:var(--r-ctl)}
+/* 组头文案变红只发生在整组失败时 */
+.cgrp.tone-bad .cghead{color:var(--sem-red)}
+/* 图标槽：组头与展开后的逐项共用同一个规格，颜色只在下面这四条里定 */
+.cgi{width:15px;height:15px;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center}
+.cgi .ok{color:var(--sem-green)}
+.cgi .bad{color:var(--sem-red)}
+.cgi .stop{color:rgb(var(--ink) /.4)}
+.cgi .run{color:rgb(var(--ink) /.4)}
+.cgttl{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* chevron：默认淡，悬停随整行变强调色；展开时旋转 90° */
+.cgch{flex:0 0 auto;width:13px;height:13px;color:rgb(var(--ink) /.35);
+  transition:transform .15s ease,color .12s ease}
+.cgrp.open .cgch{transform:rotate(90deg)}
+.cghead:hover .cgch{color:var(--accent)}
+/* 右侧导航（只在真需要用户动手时出现，从不是「重试」）——在按钮外，不嵌套交互元素 */
+.cgact{flex:0 0 auto;padding:0 12px 0 4px}
+/* 展开内容：逐项，顶上一条发丝线区分 */
+.cgbody{display:none;padding:2px 11px 10px 11px;flex-direction:column;gap:7px;
+  border-top:1px solid rgb(var(--ink) /.07)}
+.cgrp.open .cgbody{display:flex}
+/* 思考原文：只读正文行高、比正文弱一档；工具逐项 */
+/* 思考正文：斜体 + 次要色，一眼区分「这是它在想」和「这是它在说」（照 Claude 桌面端）。
+   字号跟正文走；字号收敛那张卡落地后，这里换成 --fs-body 变量。 */
+.cthink{font-size:var(--fs-body);line-height:1.75;font-style:italic;color:rgb(var(--ink) /.62);padding-top:7px;white-space:pre-wrap}
+.ctool{display:flex;align-items:center;gap:8px;font-size:var(--fs-footnote);color:rgb(var(--ink) /.75);padding-top:7px}
+.ctool .param{font-size:var(--fs-caption);
+  padding:1px 7px;border-radius:999px;background:rgb(var(--ink) /.08);color:rgb(var(--ink) /.6);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:46%}
+.ctool .st{margin-left:auto;font-size:var(--fs-footnote);color:rgb(var(--ink) /.42);white-space:nowrap}
+.ctool .err{color:var(--sem-red)}
+/* 进行中圆环的旋转 */
+.ringspin{animation:ringspin .9s linear infinite;transform-origin:50% 50%}
+@media (prefers-reduced-motion:reduce){.ringspin{animation:none}}
+@keyframes ringspin{to{transform:rotate(360deg)}}
+/* 搜索结果内联块：来源属于「结果」不折（设计稿 §0 铁律 1） */
+.csrc{display:flex;flex-direction:column;gap:6px;border-left:2px solid rgb(var(--accent) /.35);
+  padding:2px 0 2px 12px;margin:2px 13px 0}
+.csrc .csrc-item{display:flex;align-items:baseline;gap:7px;font-size:var(--fs-footnote);line-height:1.5;
+  color:rgb(var(--ink) /.8);min-width:0}
+.csrc .csrc-dom{font-size:var(--fs-caption);
+  color:rgb(var(--ink) /.42);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* 助手正文 Markdown（轻量语法，颜色全部走主题变量，亮暗自动适配） */
+.md{font-size:var(--fs-prose);line-height:1.72;word-break:break-word;overflow-wrap:anywhere}
+.md>:last-child{margin-bottom:0}
+.md>:first-child{margin-top:0}
+.md p{margin:0 0 9px}
+.md strong{font-weight:700;color:rgb(var(--ink) / 1)}
+.md em{font-style:italic}
+/* 行内 `code` 在英语回复里多为例句/短语：用正文字体 + 墨蓝浅底高亮，不作等宽代码块，去“代码味” */
+.md code{font-family:inherit;font-size:.94em;letter-spacing:.01em;
+  padding:.12em .42em;border-radius:6px;background:rgb(var(--accent) /.1);
+  color:var(--accent);border:1px solid transparent;white-space:break-spaces}
+.md pre{margin:8px 0 11px;padding:11px 13px;border-radius:var(--r-ctl);
+  background:rgb(var(--ink) /.05);border:1px solid rgb(var(--ink) /.1);overflow-x:auto}
+.md pre code{display:block;padding:0;border:0;background:none;color:rgb(var(--ink) /.92);
+  font-family:"JetBrains Mono","Cascadia Code",Consolas,monospace;font-size:.86em;
+  letter-spacing:0;line-height:1.6;white-space:pre}
+.md table{border-collapse:collapse;margin:8px 0 11px;font-size:var(--fs-body);display:block;
+  max-width:100%;overflow-x:auto}
+.md th,.md td{border:1px solid rgb(var(--ink) /.15);padding:6px 12px;text-align:left;
+  line-height:1.6;white-space:normal}
+.md th{background:rgb(var(--ink) /.05);font-weight:600}
+.md tbody tr:nth-child(even){background:rgb(var(--ink) /.025)}
+.md ul,.md ol{margin:6px 0 10px;padding-left:1.5em}
+.md li{margin:5px 0;padding-left:.15em}
+.md ul>li{list-style:disc}.md ol>li{list-style:decimal}
+.md li::marker{color:var(--accent);font-weight:600}
+/* 列表项下缩进的子列表（如编号义项下的例句）：更紧凑、marker 更淡，与主义项拉开主次 */
+.md li>ul,.md li>ol{margin:3px 0 4px}
+.md li ul li,.md li ol li{margin:3px 0}
+.md li ul li::marker,.md li ol li::marker{color:rgb(var(--accent) /.55);font-weight:500}
+.md /* 引用块（B 方案，见 design-lab/quote-block-templates.html）：
+   引文是**背景材料**，不该比批改结果还显眼 —— 竖线用灰的，不用品牌色。
+   竖线 3px → 2px；引文落在正文档 14px；不做行数截断。 */
+blockquote{margin:7px 0 9px;padding:1px 0 1px 11px;border-left:2px solid rgb(var(--ink) /.2);
+  font-size:var(--fs-body);line-height:1.72;color:rgb(var(--ink) /.62)}
+.md a{color:var(--accent);text-decoration:none;word-break:break-all}
+.md a:hover{text-decoration:underline}
+.md h1,.md h2,.md h3{font-weight:700;line-height:1.45;color:rgb(var(--ink) / 1);margin:15px 0 7px}
+.md h1{font-size:1.3em;letter-spacing:.01em}.md h2{font-size:1.17em}.md h3{font-size:1.06em}
+/* 流式中让光标贴住正文最后一行（.md 自带行高，把外层行高压掉不留空行） */
+.msg.ai:has(.caret){line-height:0}
+
+/* 输入区（原版 Composer：附件 / 输入 / 大脑胶囊 / 发送-停止）；首屏时居中放大 */
+.composer2{padding:8px 22px 4px;flex-shrink:0}
+.ask3-welcome .composer2{width:min(680px,100%);padding:0}
+.cbox{position:relative;display:flex;flex-direction:column;gap:8px;border-radius:12px;border:1px solid rgb(var(--ink) /.09);
+  background:rgb(var(--panel-rgb));padding:10px 12px;box-shadow:none;
+  transition:border-color .15s ease,box-shadow .15s ease}
+.cbox:focus-within{border-color:color-mix(in srgb,var(--accent) 52%,transparent);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 10%,transparent)}
+/* 纯文本模型下的拍照认字不可用提示条（状态5 黄条，文字功能不受影响） */
+.cvision-warn{font-size:var(--fs-footnote);line-height:1.5;color:var(--sem-yellow-ink);
+  background:color-mix(in srgb,var(--sem-yellow-bg) 55%,transparent);
+  border:1px solid color-mix(in srgb,var(--sem-yellow-ink) 35%,transparent);
+  border-radius:9px;padding:7px 10px}
+.cbox textarea{width:100%;border:none;outline:none;background:transparent;resize:none;
+  font-size:var(--fs-prose);line-height:1.7;min-height:38px;max-height:160px;padding:4px 2px 2px}
+.cbox textarea::placeholder{color:rgb(var(--ink) /.38)}
+/* 输入框内的图片附件：150×150 预览，右上角 × 移除（照 CC 桌面端） */
+.ccatts{display:flex;gap:10px;flex-wrap:wrap;padding:2px 2px 0}
+.ccatt{position:relative;width:72px;height:72px;border-radius:8px;overflow:hidden;
+  border:1px solid rgb(var(--ink) /.08);background:rgb(var(--ink) /.04)}
+.ccatt img{width:100%;height:100%;object-fit:cover;display:block}
+.ccatt .cc-x{position:absolute;top:4px;right:4px;width:16px;height:16px;border-radius:50%;
+  background:rgb(0 0 0 /.55);color:#fff;border:0;font-size:10px;line-height:14px;
+  text-align:center;cursor:pointer;padding:0}
+.ccatt .cc-x:hover{background:rgb(0 0 0 /.75)}
+/* 工具条：左组添加动作 + 弱提示，右组大脑选择 + 发送，互不抢位 */
+/* 下巴行在**输入框外面**（照 Claude 桌面端）：框里放附件预览 + "你要说的话"，
+   模型 / 思考强度 / 加图片 这一排挂在框下面。 */
+.crow{display:flex;align-items:center;gap:8px;padding:6px 2px 0}
+.crow-l{display:flex;align-items:center;gap:7px;min-width:0;flex:1}
+.crow-r{display:flex;align-items:center;gap:8px;flex-shrink:0;margin-left:auto}
+.cadd{height:28px;padding:0 8px;display:inline-flex;align-items:center;gap:5px;border-radius:8px;
+  border:1px solid transparent;font-size:var(--fs-footnote);color:rgb(var(--ink) /.55);background:transparent;
+  flex-shrink:0;white-space:nowrap;transition:background .14s ease,color .14s ease}
+.cadd:hover{background:rgb(var(--ink) /.06);color:rgb(var(--ink) /.88)}
+.cadd:disabled{opacity:.38;cursor:not-allowed}
+
+.cadd-plus{font-size:var(--fs-prose);line-height:1}
+.cadd:disabled:hover{background:transparent;color:rgb(var(--ink) /.55)}
+.chint{font-size:var(--fs-caption);color:rgb(var(--ink) /.38);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  padding-left:4px}
+@media (max-width:880px){.chint{display:none}}
+.brain{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 10px;border-radius:999px;
+  background:rgb(var(--ink) /.07);font-size:var(--fs-footnote);color:rgb(var(--ink) /.75);flex-shrink:0;margin-left:2px}
+.brain .ring{--p:12;width:15px;height:15px}
+.brain .ring circle{stroke-width:3.6}
+.brain:hover{background:rgb(var(--ink) /.11)}
+.csend{width:31px;height:31px;border-radius:8px;background:var(--btn-primary-bg);color:var(--btn-primary-ink);display:grid;place-items:center;flex-shrink:0}
+.csend:hover{filter:brightness(1.08)}
+.csend.stop{background:rgb(var(--ink) /.75)}
+.askfoot{display:flex;align-items:center;gap:6px;font-size:var(--fs-caption);color:rgb(var(--ink) /.42);padding:7px 22px 10px;flex-shrink:0}
+.askfoot .rdot{width:6px;height:6px;border-radius:50%;background:var(--sem-green)}
+.askfoot .right{margin-left:auto}
+
+.composer2.drag-over .cbox{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,rgb(var(--panel-rgb)))}
+.spin.sm{width:11px;height:11px;border-width:1.5px;display:inline-block}
+
+/* 阶段状态徽章 */
+.stage{display:inline-flex;align-items:center;gap:5px;font-size:var(--fs-footnote);font-weight:500;
+  padding:2px 9px 2px 7px;border-radius:99px;white-space:nowrap}
+.stage .sd{width:6px;height:6px;border-radius:50%;background:currentColor}
+.stage.wait{color:rgb(var(--ink) /.4);background:rgb(var(--ink) /.06)}
+.stage.ocr{color:var(--sem-yellow-ink);background:color-mix(in srgb,var(--sem-yellow-bg) 45%,transparent)}
+.stage.run{color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.stage.review{color:var(--sem-red);background:color-mix(in srgb,var(--sem-red) 9%,transparent)}
+.stage.done{color:var(--sem-green);background:color-mix(in srgb,var(--sem-green) 11%,transparent)}
+.stage.fail{color:var(--sem-red);background:color-mix(in srgb,var(--sem-red) 10%,transparent)}
+
+/* 迷你步骤条 */
+.ministeps{display:inline-flex;align-items:center;gap:3px;flex-shrink:0}
+.ministeps i{width:16px;height:3px;border-radius:2px;background:rgb(var(--ink) /.12)}
+.ministeps i.done{background:var(--sem-green)}
+.ministeps i.cur{background:var(--accent)}
+.ministeps i.err{background:var(--sem-red)}
+.ministeps i.wait{background:rgb(var(--ink) /.12)}
+
+/* 货架空态/等待屏 */
+.wb-loading{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  color:rgb(var(--ink) /.5);font-size:var(--fs-body);padding:30px;text-align:center}
+.wb-loading .ll{line-height:1.9}
+.wb-loading .ll b{color:rgb(var(--ink) /.78);font-weight:600}
+
+/* 批次货架（方案 B） */
+.board{flex-shrink:0;border-bottom:1px solid rgb(var(--ink) /.08);padding:10px 12px;
+  display:flex;flex-direction:column;gap:7px;overflow:auto;max-height:46%}
+.board-title{display:flex;align-items:center;gap:8px;font-size:var(--fs-footnote);color:rgb(var(--ink) /.5)}
+.board-title b{font-size:var(--fs-footnote);color:rgb(var(--ink) /.82)}
+.board-title .sp{flex:1}
+.board-title .bprog{font-size:var(--fs-footnote);font-variant-numeric:tabular-nums;color:var(--accent)}
+.board-title .b-actions{display:flex;gap:5px;flex-shrink:0}
+.qrow{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;width:100%;text-align:left;
+  border:1px solid transparent;background:rgb(var(--panel-rgb))}
+.qrow:hover{background:rgb(var(--ink) /.045)}
+.qrow.is-err{border-color:color-mix(in srgb,var(--sem-red) 45%,transparent);
+  background:color-mix(in srgb,var(--sem-red) 5%,transparent)}
+.qrow .q-thumb{width:38px;height:38px;border-radius:8px;overflow:hidden;flex-shrink:0;
+  border:1px solid rgb(var(--ink) /.1);display:grid;place-items:center;
+  background:rgb(var(--ink) /.05);color:rgb(var(--ink) /.4)}
+.qrow .q-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.qrow .q-thumb.txt{background:color-mix(in srgb,var(--accent) 9%,transparent);color:var(--accent)}
+.qrow .q-main{flex:1;min-width:0}
+.qrow .q-t{display:block;font-size:var(--fs-footnote);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qrow .q-s{display:flex;align-items:center;gap:7px;font-size:var(--fs-caption);color:rgb(var(--ink) /.45);margin-top:3px}
+.qrow .q-stage{flex-shrink:0}
+
+/* 货架折叠态（借方案 A 的状态点） */
+.board-mini{display:none;align-items:center;gap:14px;font-size:var(--fs-footnote);color:rgb(var(--ink) /.55);
+  padding:3px 2px 1px;flex-wrap:wrap}
+.board-mini .bm-dot{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.board-mini .bm-dot i{width:7px;height:7px;border-radius:50%;background:rgb(var(--ink) /.25)}
+.board-mini .bm-dot i.done{background:var(--sem-green)}
+.board-mini .bm-dot i.ocr{background:var(--sem-yellow-ink)}
+.board-mini .bm-dot i.run{background:var(--accent);animation:pulse 1.4s infinite}
+.board-mini .bm-dot i.review{background:var(--sem-red)}
+.board-mini .bm-dot i.fail{background:var(--sem-red)}
+.board-mini .bm-dot b{font-weight:600;color:rgb(var(--ink) /.78);margin-right:2px}
+.board-mini .bm-dot em{font-style:normal;color:rgb(var(--ink) /.45)}
+.board.collapsed{gap:0;padding:8px 12px;max-height:none}
+.board.collapsed .qrow{display:none}
+.board.collapsed .board-mini{display:flex}
+
+/* 货架行可点态 */
+button.qrow{font:inherit;cursor:pointer;width:100%}
+.qrow.is-open{border-color:color-mix(in srgb,var(--accent) 45%,transparent);
+  background:color-mix(in srgb,var(--accent) 7%,transparent)}
+
+/* 批量确认条 */
+.bulk-bar{flex-shrink:0;display:flex;align-items:center;gap:10px;padding:8px 13px;
+  border-bottom:1px solid rgb(var(--ink) /.08);
+  background:color-mix(in srgb,var(--accent) 5%,transparent);
+  font-size:var(--fs-footnote);color:rgb(var(--ink) /.7);line-height:1.5}
+.bulk-bar > span:first-child{min-width:0}
+.bulk-bar .btn{white-space:nowrap}
+.bulk-bar .sp{flex:1}
+
+/* OCR 核对视图（左原图 / 右可编辑转写稿） */
+.ask3-wb .sp{flex:1}
+.ask3-wb .muted{color:rgb(var(--ink) /.45);font-size:var(--fs-footnote)}
+.ask3-wb .tiny{font-size:var(--fs-caption)}
+.ask3-wb .pane{min-height:0}
+.ocr-split{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1.05fr;
+  grid-template-rows:minmax(0,1fr);gap:10px;padding:10px 12px;overflow:hidden}
+.ocr-pane{display:flex;flex-direction:column;min-height:0;
+  border:1px solid rgb(var(--ink) /.09);border-radius:12px;
+  background:rgb(var(--panel-rgb));overflow:hidden}
+.op-head{display:flex;align-items:center;gap:7px;padding:8px 11px;flex-shrink:0;
+  border-bottom:1px solid rgb(var(--ink) /.07);font-size:var(--fs-footnote)}
+.op-head b{font-size:var(--fs-footnote)}
+.ocr-photo-wrap{flex:1;overflow:auto;display:flex;align-items:flex-start;justify-content:center;
+  padding:10px;background:rgb(var(--ink) /.03)}
+.photo{max-width:100%;border-radius:8px;border:1px solid rgb(var(--ink) /.12);display:block}
+.photo-empty{display:flex;align-items:center;justify-content:center;text-align:center;
+  min-height:160px;width:100%;padding:20px;color:rgb(var(--ink) /.4);font-size:var(--fs-footnote);
+  border:1px dashed rgb(var(--ink) /.18);border-radius:8px;background:rgb(var(--panel-rgb))}
+.ocr-warn{margin:9px 11px 0;padding:8px 10px;border-radius:9px;font-size:var(--fs-footnote);line-height:1.7;
+  background:color-mix(in srgb,var(--sem-yellow-bg) 30%,transparent);
+  border:1px dashed color-mix(in srgb,var(--sem-yellow-ink) 45%,transparent);
+  color:var(--sem-yellow-ink)}
+.conf{display:inline-block;background:color-mix(in srgb,var(--sem-yellow-bg) 60%,transparent);
+  border:1px solid color-mix(in srgb,var(--sem-yellow-ink) 60%,transparent);
+  color:var(--sem-yellow-ink);border-radius:4px;padding:0 4px;font-weight:700;
+  font-family:Georgia,serif}
+.ocr-text{flex:1;min-height:150px;margin:10px 11px;border:1px solid rgb(var(--ink) /.12);
+  border-radius:10px;padding:10px 11px;font:13px/1.85 Georgia,"Times New Roman",serif;
+  resize:none;background:rgb(var(--app-rgb));color:rgb(var(--ink) /.86);outline:none}
+.ocr-text:focus{border-color:var(--accent)}
+.ocr-text[readonly]{background:rgb(var(--ink) /.035);color:rgb(var(--ink) /.75)}
+.ocr-foot{display:flex;align-items:center;gap:8px;padding:9px 11px;flex-shrink:0;flex-wrap:wrap;
+  border-top:1px solid rgb(var(--ink) /.07)}
+.ocr-ok{font-size:var(--fs-footnote);color:var(--sem-green);font-weight:600}
+
+/* 右翼 · 批改工作台（原版 GradeWorkbench：三标签 / 徽章 / 进度 / 裁决卡 / 整体评语） */
+.wb-head{display:flex;align-items:center;gap:9px;padding:9px 14px;flex-shrink:0;
+  box-shadow:inset 0 -1px 0 rgb(var(--ink) /.07)}
+.wb-head h2{font-size:var(--fs-body);font-weight:600;white-space:nowrap}
+.wb-head .sp{flex:1}
+.wb-tabs{display:flex;gap:4px;padding:0 14px 9px;border-bottom:1px solid rgb(var(--ink) /.07);flex-shrink:0}
+.wb-tab{height:30px;padding:0 12px;border-radius:9px;font-size:var(--fs-footnote);color:rgb(var(--ink) /.55)}
+.wb-tab:hover{background:rgb(var(--ink) /.05)}
+.wb-tab.on{background:rgb(var(--ink) /.08);color:rgb(var(--ink) /.95);font-weight:500}
+.wb-body{flex:1;overflow:auto;padding:12px 14px;display:flex;flex-direction:column;gap:10px;min-height:0}
+.wb-badges{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.wb-badges .chip b{font-weight:600}
+.wb-badges .progtxt{margin-left:auto;font-size:var(--fs-footnote);color:rgb(var(--ink) /.5)}
+.wb-prog{height:4px;border-radius:3px;background:rgb(var(--ink) /.1);overflow:hidden}
+.wb-prog i{display:block;height:100%;width:50%;border-radius:3px;background:var(--accent)}
+.wb-gist{font-size:var(--fs-footnote);line-height:1.7;color:rgb(var(--ink) /.7);
+  border-left:2px solid color-mix(in srgb,var(--accent) 45%,transparent);padding:2px 0 2px 10px}
+.dcard{border:1px solid rgb(var(--ink) /.09);border-radius:12px;padding:10px 12px;
+  background:rgb(var(--panel-rgb))}
+.dcard .drow{display:flex;align-items:baseline;gap:8px;font-size:var(--fs-body);flex-wrap:wrap}
+.dcard .tag{flex-shrink:0;font-size:var(--fs-caption);font-weight:600;padding:2px 8px;border-radius:999px}
+.dcard .tag.red{background:color-mix(in srgb,var(--sem-red) 13%,transparent);color:var(--sem-red)}
+.dcard .tag.yellow{background:color-mix(in srgb,var(--sem-yellow-bg) 70%,transparent);color:var(--sem-yellow-ink)}
+.dcard del{color:rgb(var(--ink) /.45)}
+.dcard ins{text-decoration:none;color:var(--accent);font-weight:500}
+.dcard .why{font-size:var(--fs-footnote);color:rgb(var(--ink) /.55);margin-top:4px}
+.dcard .ops{display:flex;gap:6px;margin-top:9px}
+.op{height:26px;padding:0 11px;border-radius:8px;font-size:var(--fs-footnote);border:1px solid rgb(var(--ink) /.14);color:rgb(var(--ink) /.7)}
+.op:hover{background:rgb(var(--ink) /.05)}
+.op.on{background:color-mix(in srgb,var(--sem-green) 14%,transparent);color:var(--sem-green);border-color:transparent;font-weight:500}
+.wb-foot{display:flex;gap:8px;justify-content:flex-end;padding:10px 14px;border-top:1px solid rgb(var(--ink) /.08);flex-shrink:0}
+
+
+/* 一轮的过程块：过程退后一档，答案独占。
+   规则：8px 网格 / 步骤行固定 22px 行高 / 三段对齐（图标·动词·右侧信息 64px 列） */
+.proc{margin:4px 0 12px}
+.proc-head{display:flex;align-items:center;gap:6px;width:100%;background:0 0;border:none;
+  padding:2px 0;min-height:22px;font-family:inherit;font-size:12.5px;line-height:18px;
+  color:rgb(var(--ink)/.58);cursor:pointer;text-align:left}
+.proc-head:hover{color:rgb(var(--ink)/.8)}
+.proc-caret{font-size:10px;color:rgb(var(--ink)/.38);width:10px;flex:none}
+.proc-dot{width:6px;height:6px;border-radius:50%;background:var(--sem-green);flex:none;margin:0 1px}
+.proc-live .proc-dot{background:var(--accent);animation:procPulse 1.2s infinite}
+.proc-fail .proc-dot{background:var(--sem-red)}
+.proc-fail .proc-title{color:rgb(var(--ink)/.72)}
+@keyframes procPulse{0%,100%{opacity:1}50%{opacity:.35}}
+.proc-title{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* 步骤区：一条细竖线就是"这是一段过程"的全部装饰 */
+.proc-steps{margin:2px 0 0 5px;padding:0 0 0 14px;border-left:1px solid rgb(var(--ink)/.09)}
+
+/* 单步：图标 16 ｜ 动词 ｜ 右侧信息（固定 64px，数字对齐） */
+.pstep{padding:0}
+.pstep-head{display:flex;align-items:center;gap:8px;width:100%;background:0 0;border:none;
+  padding:0;min-height:22px;font-family:inherit;font-size:13px;line-height:22px;
+  color:rgb(var(--ink)/.82);text-align:left;cursor:pointer}
+.pstep-head:disabled{cursor:default}
+.pstep-head:hover .pstep-verb{color:rgb(var(--ink))}
+.pstep-ic{flex:none;width:16px;display:grid;place-items:center;color:rgb(var(--ink)/.5)}
+.pstep-verb{flex:none;font-weight:500;letter-spacing:.01em}
+.pstep-arg{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  color:rgb(var(--ink)/.42);font-family:ui-monospace,Consolas,monospace;font-size:11.5px}
+.pstep-info{margin-left:auto;flex:none;min-width:64px;text-align:right;font-size:11.5px;
+  color:rgb(var(--ink)/.45);font-variant-numeric:tabular-nums}
+.pstep-caret{flex:none;width:10px;text-align:center;font-size:10px;color:rgb(var(--ink)/.32)}
+.pstep-fail .pstep-verb,.pstep-fail .pstep-info{color:var(--sem-red)}
+.pstep-fail .pstep-ic{color:var(--sem-red)}
+/* 展开的结果：能复制的东西才用等宽；浅底不描边框，靠底色分层 */
+.pstep-out{margin:2px 0 4px 24px;border-radius:6px;padding:8px 10px;
+  background:rgb(var(--ink)/.045);font-family:ui-monospace,Consolas,monospace;font-size:11.5px;
+  line-height:1.75;color:rgb(var(--ink)/.75);white-space:pre-wrap;overflow-x:auto;max-height:220px}
+.pstep-more{margin:0 0 4px 24px;padding:0;background:0 0;border:none;font-family:inherit;
+  font-size:11.5px;color:var(--accent);cursor:pointer}
+
+/* 过程中的旁白：不当正文，压成引用块 */
+.pnote{margin:2px 0 4px 24px;padding:1px 0 1px 9px;border-left:2px solid rgb(var(--ink)/.10);
+  font-size:12.5px;line-height:1.85;color:rgb(var(--ink)/.55)}
+
+/* 思考块在过程里的位置：比步骤略靠上，不与工具行混排 */
+.pthink{margin:1px 0 2px}
+
+.proc-error{font-size:12.5px;line-height:1.7;color:var(--sem-red);padding:4px 0}
+.proc-flat{margin:2px 0 10px}
+.thinkatom{display:inline-grid;place-items:center;color:rgb(var(--ink)/.45);flex:none;margin-right:2px}
+
+/* 没接模型时的就地提示（浮在输入区上方，不占布局） */
+.ask3-nomodel{position:fixed;left:50%;bottom:176px;transform:translateX(-50%);z-index:7;
+  display:flex;align-items:center;gap:12px;padding:9px 14px;border-radius:10px;
+  background:rgb(var(--panel-rgb));border:1px solid rgb(var(--ink)/.14);
+  box-shadow:0 10px 30px rgb(0 0 0/.18);font-size:12.5px;color:rgb(var(--ink)/.72)}
+.ask3-nomodel button{border:0;background:0 0;padding:0;cursor:pointer;font-family:inherit;
+  font-size:12.5px;font-weight:600;color:var(--accent)}

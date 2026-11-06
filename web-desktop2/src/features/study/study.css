@@ -1,0 +1,56 @@
+/* 由 template.css 按功能拆出：原文第 856-910 行 */
+/* ============ 6.11 背词（原样移植 WordbookHome） ============ */
+#view-study{padding:24px 26px 0}
+.study-wrap{max-width:1080px;margin:0 auto;padding-bottom:70px}
+.study-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.study-book{font-size:var(--fs-title);font-weight:600;margin-top:6px}
+.study-meta{font-size:var(--fs-footnote);color:rgb(var(--ink) /.55);margin-top:6px;font-variant-numeric:tabular-nums}
+.study-actions{display:flex;gap:8px;flex-wrap:wrap}
+.study-queue-label{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+.study-queue-label b{font-size:var(--fs-prose);font-weight:600}
+.study-queue-label span{font-size:var(--fs-footnote);color:rgb(var(--ink) /.5)}
+.study-queues{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.q-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.q-head b{font-size:var(--fs-prose);font-weight:600}
+.q-head span{font-size:var(--fs-footnote);color:rgb(var(--ink) /.5)}
+.q-num-row{display:flex;align-items:baseline;justify-content:space-between;margin-top:14px}
+.q-num{font-size:clamp(30px, 19.2px + 2vw, 38px);font-weight:600;font-variant-numeric:tabular-nums}
+.q-done{font-size:var(--fs-footnote);color:rgb(var(--ink) /.5);font-variant-numeric:tabular-nums}
+.q-bar{height:6px;border-radius:99px;background:rgb(var(--ink) /.1);overflow:hidden;margin-top:8px}
+.q-bar i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .2s}
+.q-foot{margin-top:16px}
+.q-foot .g-meta{margin:0}
+.study-done{background:var(--accent);color:var(--accent-ink);border-radius:12px;padding:14px 18px;
+  font-size:var(--fs-body);margin-bottom:12px}
+.study-partial{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--sem-yellow-bg);
+  color:var(--sem-yellow-ink);border-radius:12px;padding:13px 18px;font-size:var(--fs-body);margin-bottom:12px}
+.study-partial b{font-variant-numeric:tabular-nums}
+.study-partial .btn{background:var(--sem-yellow-ink);color:var(--sem-yellow-bg);border:none}
+.study-note{display:flex;gap:10px;align-items:baseline;margin-top:20px;padding:12px 16px}
+.study-note b{font-size:var(--fs-footnote);flex-shrink:0}
+.study-note span{font-size:var(--fs-footnote);color:rgb(var(--ink) /.55);line-height:1.7}
+/* 词典 → agent 的线：词条卡轻入口（明显版：强调色胶囊） */
+.e-askrow{margin-top:14px;padding-top:12px;border-top:1px dashed rgb(26 29 34 /.1);position:relative}
+.e-ask-cta{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 14px;
+  border-radius:999px;font-size:var(--fs-body);font-weight:500;color:var(--accent);
+  background:color-mix(in srgb,var(--accent) 12%,transparent);
+  border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);transition:.15s}
+.e-ask-cta:hover{background:var(--accent);color:var(--accent-ink)}
+.e-ask-logo{width:18px;height:18px;border-radius:6px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:var(--fs-caption);font-weight:600;flex-shrink:0;transition:.15s}
+.e-ask-cta:hover .e-ask-logo{background:var(--accent-ink);color:var(--accent)}
+.e-ask-arrow{margin-left:2px}
+.ask-menu{position:absolute;left:0;top:calc(100% + 6px);z-index:40;min-width:240px;
+  border-radius:12px;padding:5px;box-shadow:0 12px 32px -8px rgb(10 12 16 /.35)}
+html[data-panel="light"] .ask-menu{background:rgb(var(--panel-rgb))}
+html[data-panel="dark"] .ask-menu{background:rgb(var(--panel-rgb))}
+.ask-menu button{display:block;width:100%;text-align:left;padding:7px 10px;border-radius:8px;
+  font-size:var(--fs-footnote);color:rgb(var(--ink) /.8)}
+.ask-menu button:hover{background:rgb(var(--ink) /.06)}
+@media (max-width:1020px){
+  .dict-grid2{grid-template-columns:1fr}
+  .study-queues{grid-template-columns:1fr}
+  .pb-grid{grid-template-columns:repeat(2,1fr)}
+  .pb-trial-grid{grid-template-columns:1fr}
+}
+

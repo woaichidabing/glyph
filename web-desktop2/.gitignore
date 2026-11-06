@@ -1,0 +1,15 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+dist-ssr/
+.vite/
+
+# local env / logs
+*.local
+*.log
+.DS_Store
+
+# 安装包产物
+release/

@@ -1,0 +1,76 @@
+/* 由 template.css 按功能拆出：原文第 781-855 行 */
+/* ============ 6.10 词典（原样移植） ============ */
+.dict-grid2{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:22px;
+  max-width:1080px;margin:0 auto;padding-bottom:70px;align-items:start}
+.dict-left{min-width:0;display:flex;flex-direction:column}
+.dict-box{margin-bottom:10px}
+.dict-box input{flex:1;border:none;outline:none;background:transparent;font-size:var(--fs-prose);min-width:0;padding:8px 2px}
+.dict-box input::placeholder{color:rgb(var(--ink) /.38)}
+.hot-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.hot-label{font-size:var(--fs-footnote);color:rgb(var(--ink) /.4)}
+.hot-chip{font-size:var(--fs-footnote);padding:3px 10px;border-radius:999px;
+  border:1px solid rgb(var(--ink) /.12);color:rgb(var(--ink) /.65)}
+.hot-chip:hover{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+.dict-side2{display:flex;flex-direction:column;gap:14px;min-width:0}
+.wb-panel{border:1px solid rgb(var(--ink) /.09);border-radius:12px;
+  background:rgb(var(--panel-rgb));padding:12px 12px 14px}
+.wb-ph{display:flex;align-items:baseline;justify-content:space-between;padding:0 4px 8px}
+.wb-t{font-size:var(--fs-body);font-weight:600}
+.wb-t2{font-size:var(--fs-footnote);color:rgb(var(--ink) /.55)}
+.wb-n{font-size:var(--fs-footnote);color:rgb(var(--ink) /.45);font-variant-numeric:tabular-nums}
+.wb-list{max-height:300px;overflow:auto;display:flex;flex-direction:column}
+.wb-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;
+  padding:8px 6px;border-bottom:1px solid rgb(var(--ink) /.06);
+  font-size:var(--fs-body);font-weight:500;color:rgb(var(--ink) /.85);text-align:left}
+.wb-row:last-child{border-bottom:none}
+.wb-row:hover{background:rgb(var(--ink) /.04)}
+.wb-row .p{font-size:var(--fs-footnote);color:rgb(var(--ink) /.45);
+  font-family:Georgia,"Times New Roman",serif;flex-shrink:0}
+.wb-hist{border-top:1px solid rgb(var(--ink) /.08);padding-top:12px}
+.hist-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.hist-chips button{font-size:var(--fs-footnote);padding:3px 9px;border-radius:8px;
+  border:1px solid rgb(var(--ink) /.12);color:rgb(var(--ink) /.6)}
+.hist-chips button:hover{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+.wb-clear{font-size:var(--fs-footnote);color:rgb(var(--ink) /.5);text-decoration:underline}
+.wb-clear:hover{color:rgb(var(--ink) /.8)}
+.wb-empty{font-size:var(--fs-footnote);color:rgb(var(--ink) /.45);line-height:1.7;padding:6px 4px 10px}
+
+/* 查词框：词典页的 .cbox 恢复横向（对话输入框是上下两层，别串样式） */
+.dict-search-wrap{position:relative;margin-bottom:14px}
+.dict-box{flex-direction:row;align-items:center;gap:8px;padding:8px 10px;margin-bottom:0}
+.dict-box.focus{border-color:var(--accent)}
+.dict-glass{width:28px;height:28px;display:grid;place-items:center;color:rgb(var(--ink) /.5);flex-shrink:0}
+.dict-clear{border:none;background:transparent;font-size:var(--fs-footnote);color:rgb(var(--ink) /.45);
+  padding:4px 6px;flex-shrink:0;cursor:pointer}
+.dict-clear:hover{color:rgb(var(--ink) /.8)}
+.dict-suggest{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:40;
+  border-radius:12px;padding:6px;box-shadow:0 14px 38px -10px rgb(10 12 16 /.35);
+  border:1px solid rgb(var(--ink) /.1);background:rgb(var(--panel-rgb));max-height:340px;overflow:auto}
+.dict-sg-item{display:block;width:100%;text-align:left;padding:8px 10px;border-radius:8px;
+  font-size:var(--fs-body);color:rgb(var(--ink) /.85)}
+.dict-sg-item.on,.dict-sg-item:hover{background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.dict-hotpanel{padding:6px 8px}
+.dict-hotlabel{font-size:var(--fs-footnote);color:rgb(var(--ink) /.45);margin-bottom:8px;display:block}
+.dict-hotpanel .hot-row{margin-bottom:0}
+
+/* 词条内补充结构 */
+.sense-block + .sense-block{margin-top:12px}
+.e-formnote{font-size:var(--fs-footnote);color:rgb(var(--ink) /.5);margin-top:6px}
+.e-tags{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap}
+.e-tags .f{background:color-mix(in srgb,var(--accent) 9%,transparent);color:var(--accent)}
+.e-source{margin-top:14px;font-size:var(--fs-caption);color:rgb(var(--ink) /.38)}
+
+/* 空态 / 错误态 / 加载骨架 */
+.dict-state{border:1px dashed rgb(var(--ink) /.16);border-radius:12px;padding:30px 24px;
+  display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;background:rgb(var(--panel-rgb))}
+.dict-state b{font-size:var(--fs-prose);font-weight:600}
+.dict-state span{font-size:var(--fs-body);color:rgb(var(--ink) /.55);line-height:1.7;max-width:440px}
+.dict-state.idle{border-style:solid;border-color:rgb(var(--ink) /.08)}
+.dict-state-actions{display:flex;gap:8px;margin-top:6px}
+.dict-skeleton{display:flex;flex-direction:column;gap:12px;padding:24px}
+.sk{border-radius:6px;background:linear-gradient(90deg,rgb(var(--ink) /.06) 25%,rgb(var(--ink) /.11) 37%,rgb(var(--ink) /.06) 63%);
+  background-size:400% 100%;animation:sk-shimmer 1.4s ease infinite;height:14px}
+.sk-line.w40{width:40%;height:22px}
+.sk-line.w80{width:80%}.sk-line.w70{width:70%}.sk-line.w50{width:50%}
+@keyframes sk-shimmer{0%{background-position:100% 0}100%{background-position:0 0}}
+

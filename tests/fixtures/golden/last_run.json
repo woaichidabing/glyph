@@ -1,0 +1,442 @@
+{
+  "model": "qwen3.7-max",
+  "summary": {
+    "tp": 26,
+    "fp": 1,
+    "fn": 1,
+    "precision": 0.9629629629629629,
+    "recall": 0.9629629629629629,
+    "f0.5": 0.9629629629629628,
+    "bucket_recall": {
+      "hard": 1.0,
+      "chinglish": 0.9411764705882353,
+      "wordy": 1.0
+    },
+    "ok_false_positive_cases": [],
+    "soft_over_error_cases": [
+      "g33"
+    ],
+    "extra_suggestions": 2
+  },
+  "cases": [
+    {
+      "id": "g01",
+      "bucket": "hard",
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g02",
+      "bucket": "hard",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g03",
+      "bucket": "hard",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g04",
+      "bucket": "hard",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g05",
+      "bucket": "hard",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g06",
+      "bucket": "hard",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g07",
+      "bucket": "chinglish",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g08",
+      "bucket": "chinglish",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g09",
+      "bucket": "chinglish",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g10",
+      "bucket": "chinglish",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g11",
+      "bucket": "chinglish",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g12",
+      "bucket": "chinglish",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g13",
+      "bucket": "chinglish",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g14",
+      "bucket": "chinglish",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g15",
+      "bucket": "chinglish",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g16",
+      "bucket": "wordy",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g17",
+      "bucket": "ok",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g18",
+      "bucket": "ok",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g19",
+      "bucket": "ok",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g20",
+      "bucket": "chinglish",
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "unmatched_golds": [
+        "is poor"
+      ],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g21",
+      "bucket": "chinglish",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g22",
+      "bucket": "chinglish",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": [
+        {
+          "original": "a good chance",
+          "corrected": "a good opportunity",
+          "type": "chinglish",
+          "tier": "suggestion",
+          "source": "model",
+          "explanation_zh": "“chance”多指偶然的机会或可能性，表示“良好的机遇”时使用“opportunity”更为地道。"
+        }
+      ]
+    },
+    {
+      "id": "g23",
+      "bucket": "chinglish",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g24",
+      "bucket": "chinglish",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g25",
+      "bucket": "chinglish",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g26",
+      "bucket": "chinglish",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g27",
+      "bucket": "chinglish",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": [
+        {
+          "original": "more and more people buy cars.",
+          "corrected": "an increasing number of people are buying cars.",
+          "type": "chinglish",
+          "tier": "suggestion",
+          "source": "model",
+          "explanation_zh": "“more and more” 语法正确但略显口语化，书面语中建议替换为 “an increasing number of”；同时用现在进行时 “are buying” 能更好地体现正在发生的趋势。"
+        }
+      ]
+    },
+    {
+      "id": "g28",
+      "bucket": "soft",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g29",
+      "bucket": "soft",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g30",
+      "bucket": "soft",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g31",
+      "bucket": "soft",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g32",
+      "bucket": "soft",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g33",
+      "bucket": "soft",
+      "tp": 0,
+      "fp": 1,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [
+        {
+          "original": "Don't worry, let me",
+          "corrected": "Don't worry. Let me",
+          "type": "hard",
+          "tier": "error",
+          "source": "model",
+          "explanation_zh": "两个完整的祈使句不能仅用逗号连接（逗号拼接错误），应将逗号改为句号并大写下一句的首字母。"
+        }
+      ],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g34",
+      "bucket": "ok",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g35",
+      "bucket": "ok",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g36",
+      "bucket": "ok",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g37",
+      "bucket": "ok",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g38",
+      "bucket": "ok",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    },
+    {
+      "id": "g39",
+      "bucket": "ok",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unmatched_golds": [],
+      "false_dets": [],
+      "extra_suggestions": []
+    }
+  ]
+}

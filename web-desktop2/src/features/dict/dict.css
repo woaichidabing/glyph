@@ -1,0 +1,55 @@
+/* 由 template.css 按功能拆出：原文第 396-449 行 */
+/* ============ 6.6 词典 ============ */
+#view-dict{padding:26px 26px 0}
+.dict-search{max-width:720px;margin:0 auto 18px}
+.dict-search .cbox{align-items:center}
+.dict-search input{flex:1;border:none;outline:none;background:transparent;font-size:var(--fs-prose);min-width:0;padding:8px 2px}
+.dict-search input::placeholder{color:rgb(var(--ink) /.38)}
+.dict-hint{font-size:var(--fs-caption);color:rgb(var(--ink) /.35);flex-shrink:0;margin-right:8px}
+.dict-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:14px;max-width:1080px;
+  margin:0 auto;padding-bottom:70px;align-items:start}
+/* 词条卡 = 白纸（查来的产物，与批改卷同待遇） */
+.entry{border-radius:12px;background:#fffdf8;border:1px solid rgb(26 29 34 /.08);
+  box-shadow:0 1px 2px rgb(20 24 30 /.05);padding:20px 24px;color:#23272d}
+.e-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.e-head h2{font-size:var(--fs-title);font-weight:600;letter-spacing:.3px}
+.e-phn{font-size:var(--fs-body);color:#7a8089;font-family:Georgia,"Times New Roman",serif}
+.e-head .sp{flex:1}
+.e-sound{width:30px;height:30px;border-radius:50%;border:1px solid rgb(26 29 34 /.14);
+  display:grid;place-items:center;color:#20242a;flex-shrink:0}
+.e-sound:hover{background:rgb(26 29 34 /.05)}
+.e-save{height:28px;padding:0 12px;border-radius:999px;font-size:var(--fs-footnote);
+  border:1px solid rgb(26 29 34 /.16);color:#5a6068;flex-shrink:0}
+.e-save:hover{background:rgb(26 29 34 /.04)}
+.e-save.on{background:color-mix(in srgb,var(--sem-green) 14%,transparent);
+  color:var(--sem-green);border-color:transparent;font-weight:500}
+.e-senses{margin-top:14px;display:flex;flex-direction:column;gap:7px}
+.sense{display:flex;gap:8px;font-size:var(--fs-body);line-height:1.8;align-items:baseline}
+.sense .pos{flex-shrink:0;font-style:normal;font-weight:600;color:#2f5fa8;font-size:var(--fs-body);min-width:26px}
+.sense em{font-style:normal;color:#8a9099;font-size:var(--fs-footnote);margin-left:auto;padding-left:12px;white-space:nowrap}
+.e-forms{margin-top:14px;padding-top:12px;border-top:1px dashed rgb(26 29 34 /.1);
+  display:flex;gap:8px;flex-wrap:wrap}
+.e-forms .f{font-size:var(--fs-footnote);color:#7a8089;background:rgb(26 29 34 /.04);padding:3px 10px;border-radius:999px}
+.e-forms .f b{color:#23272d;font-weight:600}
+.e-ex{margin-top:14px;display:flex;flex-direction:column;gap:2px}
+.ex-en{font-size:var(--fs-body);line-height:1.9}
+.ex-en b{color:#2f5fa8;font-weight:600}
+.ex-cn{font-size:var(--fs-footnote);color:#8a9099;margin-bottom:8px}
+.e-ask{margin-top:14px;padding-top:12px;border-top:1px dashed rgb(26 29 34 /.1);
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.e-ask-label{font-size:var(--fs-footnote);color:#8a9099}
+.dict-side{display:flex;flex-direction:column;gap:12px}
+.side-card h4{font-size:var(--fs-body);font-weight:600;display:flex;align-items:center}
+.side-card h4 span{margin-left:auto;font-size:var(--fs-caption);font-weight:400;color:rgb(var(--ink) /.45)}
+.r-list{display:flex;flex-direction:column;gap:2px;margin-top:8px}
+.r-row{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:8px;
+  font-size:var(--fs-body);color:rgb(var(--ink) /.8)}
+.r-row .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left}
+.r-row time{font-size:var(--fs-caption);color:rgb(var(--ink) /.4);flex-shrink:0}
+.r-row:hover{background:rgb(var(--ink) /.05)}
+.wb-cta p{font-size:var(--fs-footnote);color:rgb(var(--ink) /.55);margin-top:4px}
+.wb-cta .btn{margin-top:10px}
+@media (max-width:1020px){
+  .dict-grid{grid-template-columns:1fr}
+}
+

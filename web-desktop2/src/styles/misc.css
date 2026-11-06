@@ -1,0 +1,182 @@
+/* 由 template.css 按功能拆出：原文第 1945-2122 行 */
+/* ==========================================================================
+   外观开关 —— 三个属性都挂在 <html> 上，由 store.ts 的 applyAppearance 落下来
+   （逻辑在 adapters/appearance.ts，那边是纯函数、有测试）
+   ========================================================================== */
+
+/* ---- 减少动效 ----
+   用 0.01ms 而不是 animation:none —— 让动画**瞬间跑完**，终态才对；
+   直接 none 会让元素停在起始态（比如淡入的还没淡进来）。
+   同时认系统偏好：此前项目完全没处理 prefers-reduced-motion。 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+html[data-motion="reduced"] *,
+html[data-motion="reduced"] *::before,
+html[data-motion="reduced"] *::after {
+  animation-duration: .01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: .01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* ---- 界面密度：紧凑把行距和内边距收一档 ---- */
+html[data-density="compact"] .sb-item { height: 30px }
+html[data-density="compact"] .cghead { padding: 6px 10px }
+html[data-density="compact"] .msg { padding: 8px 12px; line-height: 1.7 }
+html[data-density="compact"] .md { line-height: 1.62 }
+html[data-density="compact"] .md p { margin-bottom: 7px }
+
+/* ---- 消息字号：**只作用于消息正文**，不碰侧栏、输入区、设置面板 ----
+   这正是 CC 的做法：字号挂在消息上，不是挂在整个界面上。 */
+html[data-textsize="sm"] .md { font-size: 13px }
+html[data-textsize="sm"] .msg,
+html[data-textsize="sm"] .cthink { font-size: 12px }
+html[data-textsize="lg"] .md { font-size: 17px }
+html[data-textsize="lg"] .msg,
+html[data-textsize="lg"] .cthink { font-size: 16px }
+
+/* ==========================================================================
+   消息操作排 + 三种终态 —— 见 design-lab/transcript-cc-parity-templates.html
+   ========================================================================== */
+
+/* 气泡外面那层：用户的消息右对齐，操作排跟着右对齐 */
+.turn-user { display:flex;flex-direction:column;align-items:flex-end;gap:4px;
+  max-width:80%;align-self:flex-end }
+.turn-user .msg.user { max-width:100% }
+.turn-ai { display:flex;flex-direction:column;gap:4px;min-width:0 }
+
+/* 消息操作排：**只剩一颗** —— 复制。朗读 / 赞踩 / 重试都不做（理由见组件注释） */
+.macts { display:flex;align-items:center;gap:2px }
+.turn-user .macts { justify-content:flex-end }
+.mact { display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 8px;
+  border:0;border-radius:6px;background:transparent;color:rgb(var(--ink) /.42);
+  font:inherit;font-size:var(--fs-footnote);cursor:pointer;
+  transition:background .12s ease,color .12s ease }
+.mact:hover { background:rgb(var(--ink) /.06);color:rgb(var(--ink) /.75) }
+.mact svg { flex:0 0 auto }
+
+/* 终态那一行：左边一句结论，右边一句人话 */
+.turn-ended,.turn-empty { display:flex;align-items:baseline;gap:8px;flex-wrap:wrap }
+.te-k { color:rgb(var(--ink) /.72);font-weight:500 }
+.te-d { color:rgb(var(--ink) /.45) }
+
+/* 通用转圈（别处也用这个 keyframes，保留一份全的） */
+@keyframes spin { to { transform: rotate(360deg) } }
+
+/* ==========================================================================
+   细节一批（见 design-lab/transcript-cc-parity-templates.html）
+   ========================================================================== */
+
+/* 选中色：不指定的话各平台默认色（蓝 / 灰）跟这套暖灰调子打架 */
+::selection { background: color-mix(in srgb, var(--accent) 26%, transparent) }
+
+/* 读屏专用：视觉隐藏但**不能用 display:none**（那样读屏也念不到） */
+.sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0 }
+
+/* 代码块右上角的复制：平时不抢眼，悬停或键盘聚焦才显出来 */
+.codewrap { position:relative }
+.codecopy { position:absolute;top:6px;right:6px;height:22px;padding:0 8px;
+  border:1px solid rgb(var(--ink) /.12);border-radius:6px;
+  background:rgb(var(--panel-rgb));color:rgb(var(--ink) /.5);
+  font:inherit;font-size:var(--fs-caption);cursor:pointer;opacity:0;
+  transition:opacity .14s ease,color .14s ease,background .14s ease }
+.codewrap:hover .codecopy,.codecopy:focus-visible { opacity:1 }
+.codecopy:hover { color:rgb(var(--ink) /.85);background:rgb(var(--ink) /.06) }
+
+/* 步骤行里的「看原文」：跟正文一样低调，但看得出可点 */
+.clink { margin-left: auto;padding:0 4px;border:0;background:none;color:rgb(var(--ink) /.45);
+  font:inherit;font-size:var(--fs-caption);text-decoration:underline;
+  text-underline-offset:2px;text-decoration-color:rgb(var(--ink) /.2);cursor:pointer }
+.clink:hover { color:var(--accent) }
+
+/* 发送学 CC：**框内右下角一个不起眼的回车符号**（定稿样稿 §5.6）。
+   原来的黑圆点大按钮从框外那行移除；跑的时候同一位置变停止。 */
+.csend.sendin { position:absolute;inset-inline-end:8px;bottom:6px;width:24px;height:24px;
+  display:grid;place-items:center;border:0;border-radius:6px;background:transparent;
+  color:rgb(var(--ink) /.45);cursor:pointer;
+  transition:background .12s ease,color .12s ease }
+.csend.sendin:hover { background:rgb(var(--ink) /.06);color:rgb(var(--ink) /.85) }
+.csend.sendin.stop { color:var(--sem-red) }
+
+/* 拆分后的第二颗：思考强度。跟模型 chip 并排，间距 2px（CC 同款紧凑） */
+.bp-chip-effort { margin-left:2px;min-width:34px;justify-content:center }
+.bp-chip-effort .bp-chip-label { min-width:14px;text-align:center }
+
+/* 强度面板现在是自己的浮层：顶部一个标题（不再是「返回模型」的按钮） */
+.bp-head-static { display:block;padding:10px 13px 6px;font-size:var(--fs-footnote);
+  color:rgb(var(--ink) /.45);letter-spacing:.02em }
+
+/* ==========================================================================
+   思考深度滑杆 —— 照定稿样稿 §5.6（CC 同款）：更快 ←→ 更聪明，几档几刻度，就近磁吸
+   ========================================================================== */
+.effp-head { display:flex;align-items:baseline;gap:8px;line-height:18px;padding:11px 13px 0 }
+.effp-t { font-size:var(--fs-body);color:rgb(var(--ink) /.45) }
+.effp-v { font-size:var(--fs-body);font-weight:500;letter-spacing:-.01em;color:rgb(var(--ink) /.92) }
+.effp-q { margin-inline-start:auto;align-self:center;width:13px;height:13px;border-radius:50%;
+  border:1px solid rgb(var(--ink) /.26);display:grid;place-items:center;font-size:8px;line-height:1;
+  color:rgb(var(--ink) /.45);background:transparent;cursor:pointer;padding:0 }
+.effp-q:hover { color:rgb(var(--ink) /.7);border-color:rgb(var(--ink) /.4) }
+.effp-ends { display:flex;justify-content:space-between;margin:18px 13px 0;line-height:16px;
+  font-size:var(--fs-footnote);color:rgb(var(--ink) /.45) }
+.effp-rail { position:relative;display:block;height:20px;margin:8px 13px 0;border-radius:10px;
+  background:rgb(var(--ink) /.10);cursor:pointer;touch-action:none }
+.effp-rail:focus-visible { outline:2px solid color-mix(in srgb,var(--accent) 65%,transparent);outline-offset:4px }
+.effp-fill { position:absolute;inset-block:0;left:0;border-radius:10px;background:rgb(var(--ink) /.27) }
+.effp-tick { position:absolute;top:50%;width:3.5px;height:3.5px;margin-top:-1.75px;margin-left:-1.75px;
+  border-radius:50%;background:rgb(var(--ink) /.24);pointer-events:none }
+.effp-thumb { position:absolute;top:0;width:16px;height:20px;margin-left:-8px;border-radius:5px;
+  background:#fff;pointer-events:none;
+  box-shadow:0 0 0 .5px rgb(0 0 0 /.04),0 1px 2px rgb(0 0 0 /.10);transition:left .12s cubic-bezier(.32,.72,0,1) }
+html[data-panel="dark"] .effp-thumb { background:#e8e8e4 }
+.effp-foot { margin:7px 13px 11px;line-height:17px;text-align:center;
+  font-size:var(--fs-footnote);color:rgb(var(--ink) /.62) }
+.bp-sheet:has(.effp-rail) { width:260px;padding:0 }
+
+/* ==========================================================================
+   模型列表：滚轮要好用（9 个型号，限高 196px 只装得下 4 个半）
+   ========================================================================== */
+/* 列表本身能滚，但只有悬在它上面滚轮才生效 —— 面板上下还有 padding 和 divider，
+   鼠标停在那儿滚不动，手感就像坏了。把滚动容器撑到面板整体。 */
+.bp-models {
+  /* 关键：这是一个 <span>，行内元素的 clientHeight / scrollHeight 恒为 0，
+     overflow 也不生效 —— 所以之前设的 max-height / overflow-y:auto 全是空转，
+     9 个模型全部撑开（实测列表 444px、面板 538px），面板被视口切掉，看着就是"滚不动"。
+     必须改成块级，才有盒子、才滚得起来。 */
+  display:block;
+  /* 264px ≈ 6 行：这是"挑一个"的动作，一次只看得到 4 个的话，看不见的等于不存在 */
+  max-height:264px;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  scrollbar-gutter:stable;
+}
+/* 滚动条：用全站统一那条 10px / 3px 内缩的样式，深色下也看得见 */
+.bp-models::-webkit-scrollbar { width:10px }
+.bp-models::-webkit-scrollbar-thumb { background:rgb(var(--ink) /.16);border-radius:8px;
+  border:3px solid transparent;background-clip:content-box }
+.bp-models::-webkit-scrollbar-thumb:hover { background:color-mix(in srgb,var(--ink) 30%,transparent);
+  background-clip:content-box }
+.bp-models::-webkit-scrollbar-track { background:transparent }
+/* 滚到底 / 滚到头再滚，别把外面那一页带着滚 */
+
+/* ==========================================================================
+   桌面端窄窗口适配
+   外壳四边各留 16px、侧栏固定 248px，窗口窄到 1020px 以下时输入框外那排会顶到一起。
+   拆成两颗 chip 后更宽了，所以这一档：模型 chip 只留图标、藏掉次要按钮与提示。
+   ========================================================================== */
+@media (max-width:1020px) {
+  /* 只留品牌标 + 箭头，模型名藏起来 —— 名字在点开的面板里本来就有，这里只是提示
+  .bp-chip .bp-chip-label { display:none }
+  .bp-chip { padding:0 6px }
+  /* 强度 chip 本来就一个字，不动 */
+  .chint { display:none }
+}
+
+/* 选中模型失效的提示条（黄）：与红错误条同版式，语气不同 */
+.bp-error.bp-warn { background: rgba(184,134,11,.14); color: var(--sem-amber, #b8860b) }

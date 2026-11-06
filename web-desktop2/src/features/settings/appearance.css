@@ -1,0 +1,68 @@
+/* 外观设置：DSH 式扁平行 + 英文试读条。 */
+
+/* 真正落到对话正文上的外观开关 */
+html[data-enfont="serif"] .md{font-family:Georgia,"Times New Roman","Songti SC","SimSun",serif}
+html[data-enfont="serif"] .md code,
+html[data-enfont="serif"] .md pre,
+html[data-enfont="serif"] .md kbd{font-family:ui-monospace,Consolas,"Liberation Mono",monospace}
+html[data-linewidth="narrow"] .md{max-width:46ch}
+html[data-linewidth="standard"] .md{max-width:62ch}
+html[data-linewidth="wide"] .md{max-width:78ch}
+html[data-lineheight="compact"] .md{line-height:1.55}
+html[data-lineheight="comfortable"] .md{line-height:1.72}
+html[data-lineheight="loose"] .md{line-height:1.9}
+
+html[data-markstyle="highlight"] .mk-bad{text-decoration:none;border-radius:2px;padding:0 2px;
+  background:color-mix(in srgb,var(--sem-red) 14%,transparent)}
+html[data-markstyle="high"] .mk-bad{text-decoration:none;border-radius:2px;padding:0 2px;
+  color:#1a4f9e;background:#e6eefb}
+html[data-panel="dark"][data-markstyle="high"] .mk-bad{color:#a9c7ff;background:#1d2b45}
+
+/* 设置页 */
+.ap{display:flex;flex-direction:column;min-height:0}
+.ap-rows{display:flex;flex-direction:column}
+.ap-row{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 0;
+  border-bottom:.5px solid rgb(var(--ink)/.11)}
+.ap-row:last-child{border-bottom:0}
+.ap-copy{min-width:0}
+.ap-title{font-size:var(--fs-body);line-height:20px;color:rgb(var(--ink)/.88)}
+.ap-desc{margin-top:3px;color:rgb(var(--ink)/.32);font-size:var(--fs-caption);line-height:18px}
+.ap-control{flex:0 0 242px;display:flex;align-items:center;justify-content:flex-end}
+.ap-seg{display:flex;width:100%;border:1px solid rgb(var(--ink)/.11);border-radius:7px;padding:2px;
+  background:rgb(var(--ink)/.025)}
+.ap-seg button{flex:1;height:27px;border:0;border-radius:5px;background:transparent;color:rgb(var(--ink)/.5);
+  font:inherit;font-size:var(--fs-caption);cursor:pointer;white-space:nowrap}
+.ap-seg button:hover{color:rgb(var(--ink)/.75)}
+.ap-seg button.on{background:rgb(var(--panel-rgb));color:rgb(var(--ink)/.86);font-weight:600;
+  box-shadow:0 1px 2px rgb(10 14 20/.08)}
+html[data-panel="dark"] .ap-seg button.on{background:rgb(255 255 255/.12);color:#fff}
+.ap-switch{width:34px;height:20px;border-radius:999px;border:0;background:rgb(var(--ink)/.2);
+  position:relative;cursor:pointer;flex:none}
+.ap-switch::after{content:"";position:absolute;left:2px;top:2px;width:16px;height:16px;border-radius:50%;
+  background:#fff;box-shadow:0 1px 2px rgb(0 0 0/.2);transition:left .15s}
+.ap-switch.on{background:var(--accent)}
+.ap-switch.on::after{left:16px}
+.ap-switch:focus-visible,.ap-seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.ap-specimen-head{display:flex;align-items:center;gap:8px;margin:10px 0 7px;padding-top:10px;
+  border-top:.5px solid rgb(var(--ink)/.11);color:rgb(var(--ink)/.32);font-size:var(--fs-caption)}
+.ap-specimen-head span:last-child{margin-left:auto}
+.ap-specimen{margin:0;padding-left:11px;border-left:2px solid color-mix(in srgb,var(--accent) 42%,transparent);
+  color:rgb(var(--ink)/.64);font-size:13px;line-height:1.75;word-break:break-word}
+.ap-font-serif{font-family:Georgia,"Times New Roman","Songti SC","SimSun",serif}
+.ap-font-sans{font-family:inherit}
+.ap-width-narrow{max-width:46ch}
+.ap-width-standard{max-width:62ch}
+.ap-width-wide{max-width:78ch}
+.ap-leading-compact{line-height:1.55}
+.ap-leading-comfortable{line-height:1.72}
+.ap-leading-loose{line-height:1.9}
+.ap-size-sm{font-size:12px}
+.ap-size-lg{font-size:15px}
+.ap-mark-highlight .mk-bad{text-decoration:none;border-radius:2px;padding:0 2px;
+  background:color-mix(in srgb,var(--sem-red) 14%,transparent)}
+.ap-mark-high .mk-bad{text-decoration:none;border-radius:2px;padding:0 2px;color:#1a4f9e;background:#e6eefb}
+html[data-panel="dark"] .ap-mark-high .mk-bad{color:#a9c7ff;background:#1d2b45}
+.ap-specimen-meta{display:flex;gap:8px;margin-top:8px;color:rgb(var(--ink)/.32);font-size:var(--fs-caption)}
+.ap-specimen-meta span{padding-right:8px;border-right:1px solid rgb(var(--ink)/.09)}
+.ap-specimen-meta span:last-child{border-right:0}

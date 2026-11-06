@@ -1,0 +1,13 @@
+/* DSH 式思考块：固定标题，点开看原文 */
+.thinkblock{margin:8px 0 10px;color:rgb(var(--ink) /.58)}
+.thinkhead{display:flex;align-items:center;gap:8px;width:100%;padding:3px 0;border:0;background:none;
+  font:inherit;font-size:var(--fs-body);color:rgb(var(--ink) /.6);text-align:left;cursor:pointer}
+.thinkhead:hover{color:rgb(var(--ink) /.82)}
+.thinkchev{width:13px;height:13px;flex:none;color:rgb(var(--ink) /.42);transition:transform .15s ease}
+.thinkblock.open .thinkchev{transform:rotate(90deg)}
+.thinktitle{font-size:var(--fs-body);line-height:1.5}
+.thinkbody{margin:4px 0 10px 21px;padding-right:6px;max-height:260px;overflow:auto;
+  font-size:var(--fs-footnote);line-height:1.75;color:rgb(var(--ink) /.58);
+  white-space:pre-wrap;word-break:break-word}
+.thinkbody::-webkit-scrollbar{width:6px}
+.thinkbody::-webkit-scrollbar-thumb{background:rgb(var(--ink) /.12);border-radius:3px}

@@ -1,0 +1,16 @@
+/* 由 template.css 按功能拆出：原文第 1216-1230 行 */
+/* ===== 切片8：失败隔离与单篇重试 ===== */
+.qrow.is-err .q-s b{color:var(--sem-red);font-weight:600}
+.q-retry{font-size:var(--fs-caption);color:var(--sem-red);background:rgb(var(--panel-rgb));
+  border:1px solid color-mix(in srgb,var(--sem-red) 40%,transparent);border-radius:7px;
+  padding:2px 9px;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.q-retry:hover{background:color-mix(in srgb,var(--sem-red) 8%,transparent)}
+.bulk-bar.bulk-err{color:var(--sem-red);border-color:color-mix(in srgb,var(--sem-red) 30%,transparent);
+  background:color-mix(in srgb,var(--sem-red) 5%,transparent)}
+.err-pane{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  padding:30px 20px;text-align:center;height:100%;overflow:auto}
+.err-pane .err-ic{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  background:color-mix(in srgb,var(--sem-red) 10%,transparent);color:var(--sem-red);flex-shrink:0}
+.err-pane .muted{color:rgb(var(--ink) /.5);font-size:var(--fs-footnote)}
+.err-pane .tiny{font-size:var(--fs-caption);color:rgb(var(--ink) /.38)}
+

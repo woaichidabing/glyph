@@ -1,0 +1,9 @@
+/* 由 template.css 按功能拆出：原文第 693-700 行 */
+/* ============ 对话终态判定条（失败 / 未确认，Transcript 通用） ============ */
+.verdict{border:1px solid rgb(var(--ink) /.12);border-radius:12px;padding:13px 15px;
+  font-size:var(--fs-body);line-height:1.9;color:rgb(var(--ink) /.85)}
+.verdict.miss .v-tag{color:var(--sem-yellow-ink)}
+.verdict.hit .v-tag{color:var(--sem-green)}
+.verdict .v-quote{color:rgb(var(--ink) /.6);font-size:var(--fs-footnote)}
+.verdict .v-hint{margin-top:6px;font-size:var(--fs-footnote);color:var(--accent);font-weight:500}
+

@@ -1,0 +1,210 @@
+{
+  "model": "qwen3.7-max",
+  "judging": {
+    "total": 54,
+    "correct": 54,
+    "accuracy": 1.0,
+    "confusion": {
+      "independent": {
+        "independent": 18
+      },
+      "hinted": {
+        "hinted": 18
+      },
+      "wrong": {
+        "wrong": 18
+      }
+    },
+    "per_code": {
+      "VERB:TENSE": 1.0,
+      "MORPH": 1.0,
+      "NOUN:NUM": 1.0,
+      "NOUN:INFL": 1.0,
+      "SPELL": 1.0,
+      "DET": 1.0
+    },
+    "mismatches": [],
+    "model": "qwen3.7-max"
+  },
+  "generation": {
+    "total": 18,
+    "compliant": 18,
+    "compliance_rate": 1.0,
+    "failures": [],
+    "generated": [
+      {
+        "error_code": "VERB:TENSE",
+        "type": "fill",
+        "prompt": "Last Monday, Tom ___ (see) a wonderful movie at the cinema.",
+        "acceptable_answers": [
+          "saw"
+        ],
+        "point_zh": "当句中有明确的过去时间状语（如 last Monday、yesterday 等）时，谓语动词应使用一般过去时。"
+      },
+      {
+        "error_code": "VERB:TENSE",
+        "type": "fill",
+        "prompt": "Listen! The baby ___ (cry) in the next room.",
+        "acceptable_answers": [
+          "is crying"
+        ],
+        "point_zh": "当句中有 Look、Listen 等提示词表明动作正在发生时，谓语动词应使用现在进行时（am/is/are + doing）。"
+      },
+      {
+        "error_code": "VERB:TENSE",
+        "type": "fill",
+        "prompt": "Next Friday, the students ___ (have) a science exam in the lab.",
+        "acceptable_answers": [
+          "will have",
+          "are going to have"
+        ],
+        "point_zh": "句中有明确的将来时间状语（如 next Friday）时，谓语动词应使用一般将来时（will + 动词原形 / be going to + 动词原形），而非一般现在时。"
+      },
+      {
+        "error_code": "MORPH",
+        "type": "fill",
+        "prompt": "My sister ___ (watch) TV every evening after dinner.",
+        "acceptable_answers": [
+          "watches"
+        ],
+        "point_zh": "一般现在时中，主语为第三人称单数时，谓语动词需使用三单形式（加-s或-es）"
+      },
+      {
+        "error_code": "MORPH",
+        "type": "fill",
+        "prompt": "That was the ___ (bad) meal I have ever eaten at this restaurant.",
+        "acceptable_answers": [
+          "worst"
+        ],
+        "point_zh": "在'the + 形容词 + 名词 + I have ever done'结构中，形容词须用最高级形式，注意不规则变化（如bad→worst）。"
+      },
+      {
+        "error_code": "MORPH",
+        "type": "fill",
+        "prompt": "He drives very ___ (careful) on rainy days.",
+        "acceptable_answers": [
+          "carefully"
+        ],
+        "point_zh": "修饰动词需要用副词形式，形容词careful需加-ly变为副词carefully。"
+      },
+      {
+        "error_code": "NOUN:NUM",
+        "type": "fill",
+        "prompt": "She bought five ___ (book) from the bookstore yesterday.",
+        "acceptable_answers": [
+          "books"
+        ],
+        "point_zh": "可数名词前有大于1的数词修饰时，名词须用复数形式"
+      },
+      {
+        "error_code": "NOUN:NUM",
+        "type": "fill",
+        "prompt": "The teacher asked three ___ (child) to clean the classroom after school.",
+        "acceptable_answers": [
+          "children"
+        ],
+        "point_zh": "不规则名词复数形式：child 的复数为 children，需与前面的数词 three 保持数的一致。"
+      },
+      {
+        "error_code": "NOUN:NUM",
+        "type": "fill",
+        "prompt": "She picked five ___ (flower) from the garden this morning.",
+        "acceptable_answers": [
+          "flowers"
+        ],
+        "point_zh": "可数名词前有大于1的数词修饰时，名词需用复数形式"
+      },
+      {
+        "error_code": "NOUN:INFL",
+        "type": "correct",
+        "prompt": "Please correct the error in the following sentence:\nShe has made many progresses in her English studies this semester.",
+        "acceptable_answers": [
+          "She has made much progress in her English studies this semester.",
+          "She has made a lot of progress in her English studies this semester."
+        ],
+        "point_zh": "不可数名词progress没有复数形式，不能加-s，且修饰不可数名词应使用much而非many。"
+      },
+      {
+        "error_code": "NOUN:INFL",
+        "type": "correct",
+        "prompt": "The students have made great progresses this semester.",
+        "acceptable_answers": [
+          "The students have made great progress this semester."
+        ],
+        "point_zh": "不可数名词没有复数形式，progress（进步）为不可数名词，不能加-es变为progresses。"
+      },
+      {
+        "error_code": "NOUN:INFL",
+        "type": "correct",
+        "prompt": "Please correct the error in the following sentence: They bought some expensive furnitures for their new house.",
+        "acceptable_answers": [
+          "They bought some expensive furniture for their new house."
+        ],
+        "point_zh": "不可数名词（如furniture）没有复数形式，词尾不能加-s。"
+      },
+      {
+        "error_code": "SPELL",
+        "type": "correct",
+        "prompt": "Please correct the spelling error in the following sentence: We need to keep the two groups seperate during the experiment.",
+        "acceptable_answers": [
+          "We need to keep the two groups separate during the experiment."
+        ],
+        "point_zh": "常见拼写错误：separate 常被误拼为 seperate，需牢记正确拼写。"
+      },
+      {
+        "error_code": "SPELL",
+        "type": "correct",
+        "prompt": "I often recieve emails from my classmates.",
+        "acceptable_answers": [
+          "I often receive emails from my classmates."
+        ],
+        "point_zh": "常见易错词拼写：receive 中字母 c 后应接 ei 而非 ie，正确拼写为 receive。"
+      },
+      {
+        "error_code": "SPELL",
+        "type": "correct",
+        "prompt": "I didn't recieve your email yesterday.",
+        "acceptable_answers": [
+          "I didn't receive your email yesterday."
+        ],
+        "point_zh": "常见易错词拼写：receive 的正确拼写为 r-e-c-e-i-v-e，注意 ei 的顺序，不要误写为 ie。"
+      },
+      {
+        "error_code": "DET",
+        "type": "fill",
+        "prompt": "It took him ___ (a) hour to finish the homework.",
+        "acceptable_answers": [
+          "an"
+        ],
+        "point_zh": "hour 中 h 不发音，以元音音素开头，前面应使用冠词 an 而非 a。"
+      },
+      {
+        "error_code": "DET",
+        "type": "correct",
+        "prompt": "请改正下列句子中的冠词错误：He is a honest boy who never tells lies.",
+        "acceptable_answers": [
+          "an"
+        ],
+        "point_zh": "冠词a/an的选择取决于其后单词的首个发音音素，honest首字母h不发音，以元音音素开头，故用an。"
+      },
+      {
+        "error_code": "DET",
+        "type": "fill",
+        "prompt": "It takes about ___ (a) hour to get there by bus.",
+        "acceptable_answers": [
+          "an"
+        ],
+        "point_zh": "不定冠词a/an的选择取决于其后单词的首个发音而非拼写，hour的h不发音，以元音音素开头，应用an。"
+      }
+    ],
+    "model": "qwen3.7-max"
+  },
+  "answer_audit": {
+    "total": 18,
+    "sound": 18,
+    "sound_rate": 1.0,
+    "failures": [],
+    "skipped": 0,
+    "model": "qwen3.7-max"
+  }
+}

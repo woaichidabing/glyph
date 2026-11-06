@@ -1,0 +1,90 @@
+/* DSH 欢迎页版式还原：尺寸/字号/颜色按它的样式表，品牌换 Glyph */
+@font-face{font-family:"Montserrat";font-style:normal;font-weight:300;font-display:swap;
+  src:url("../assets/fonts/montserrat-light.woff2") format("woff2")}
+@font-face{font-family:"Montserrat";font-style:normal;font-weight:400;font-display:swap;
+  src:url("../assets/fonts/montserrat-regular.woff2") format("woff2")}
+@font-face{font-family:"Montserrat";font-style:normal;font-weight:500;font-display:swap;
+  src:url("../assets/fonts/montserrat-medium.woff2") format("woff2")}
+
+/* 整窗底部色：DSH 是白 40% 或 深色 24,25,28 */
+.ob-root{position:fixed;inset:0;z-index:80;background:#fff;color:#0f1115;
+  --ob-label-primary:#0f1115;--ob-label-secondary:#61666b;--ob-label-caption:#adb2b8;
+  --ob-border-l2:#0000001a;--ob-border-l4:#00000029;--ob-elevated:#fff;
+  --ob-floating-hover:#f1f3f5;--ob-primary-hover:#43454a;
+  --ob-font:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  font-family:var(--ob-font);overflow:auto}
+html[data-panel="dark"] .ob-root{background:#18191c;color:#f9fafb;
+  --ob-label-primary:#f9fafb;--ob-label-secondary:#cfd3d6;--ob-label-caption:#81858c;
+  --ob-border-l2:#ffffff1f;--ob-border-l4:#ffffff33;--ob-elevated:#43454a;
+  --ob-floating-hover:#353638;--ob-primary-hover:#ebeef2}
+
+/* 三段：40 品牌 / 中间 / 104 按钮；padding 同 DSH */
+.ob-welcome{display:grid;grid-template-rows:40px minmax(0,1fr) 104px;
+  justify-items:center;align-items:center;min-height:100vh;
+  padding:24px 48px 76px;box-sizing:border-box;outline:none}
+.ob-welcome>.ob-tagline,.ob-welcome>.ob-key-form{grid-row:2;grid-column:1}
+
+/* 品牌：DSH 是一条 472×40 的字样，这里换成图标 + Montserrat 字 */
+.ob-brand{grid-row:1;display:flex;align-items:center;gap:10px;height:40px}
+.ob-brand img{width:32px;height:32px;border-radius:8px;display:block}
+.ob-brand span{font-family:"Montserrat",var(--ob-font);font-weight:500;font-size:26px;letter-spacing:.01em}
+
+/* 标语：24px 细体，品牌名 26px 中粗 */
+.ob-tagline{margin:0;text-align:center;white-space:nowrap}
+.ob-tagline h1{margin:0;font-size:24px;font-weight:300;line-height:40px;color:var(--ob-label-secondary)}
+.ob-tagline em{color:var(--ob-label-primary);font-family:"Montserrat",var(--ob-font);font-size:26px;font-style:normal;font-weight:500}
+.ob-tagline p{margin:6px 0 0;font-size:16px;font-weight:300;line-height:26px;color:var(--ob-label-secondary);white-space:normal}
+
+/* 底部按钮：240 宽、竖排、间距 16 */
+.ob-actions{grid-row:3;grid-column:1;align-self:stretch;display:flex;flex-direction:column;gap:16px;width:240px;position:relative}
+.ob-actions button{display:flex;align-items:center;justify-content:center;height:44px;padding:8px 16px;
+  border:1px solid transparent;border-radius:10px;font-family:var(--ob-font);font-size:14px;font-weight:500;
+  line-height:22px;cursor:pointer;transition:background-color .2s cubic-bezier(.4,0,.2,1),border-color .2s cubic-bezier(.4,0,.2,1),color .3s cubic-bezier(.4,0,.2,1)}
+.ob-actions button:disabled{cursor:not-allowed;opacity:.4}
+.ob-actions button:focus-visible,.ob-dialog button:focus-visible,.ob-input:focus-visible,.ob-adv-field summary:focus-visible{
+  outline:2px solid var(--ob-label-primary);outline-offset:3px}
+.ob-actions .ob-primary{background:var(--btn-primary-bg);color:var(--btn-primary-ink)}
+
+.ob-primary:hover:not(:disabled){background:var(--ob-primary-hover)}
+.ob-actions .ob-secondary,.ob-dialog .ob-secondary{border-color:var(--ob-border-l2);
+  background:var(--ob-elevated);color:var(--ob-label-primary)}
+html[data-panel="dark"] .ob-secondary{background:#43454a}
+.ob-actions .ob-secondary:hover:not(:disabled),.ob-dialog .ob-secondary:hover:not(:disabled){background:var(--ob-floating-hover)}
+.ob-back{position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%);
+  white-space:nowrap;min-width:58px;height:28px;padding:4px 10px;border:0;border-radius:24px;
+  background:transparent;color:var(--ob-label-secondary);font-family:"Montserrat",var(--ob-font);
+  font-weight:300;font-size:14px;line-height:20px;cursor:pointer}
+.ob-back:hover:not(:disabled){color:var(--ob-label-primary)}
+
+/* Key 表单：440 宽、间距 40 */
+.ob-key-form{display:flex;flex-direction:column;align-items:center;gap:32px;width:440px}
+.ob-key-heading{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.ob-key-heading h1{margin:0;font-size:20px;font-weight:400;line-height:32px;letter-spacing:.01em}
+.ob-key-heading p{margin:0;color:var(--ob-label-secondary);font-size:16px;font-weight:300;line-height:22px;letter-spacing:.02em}
+.ob-field{position:relative;width:100%}
+.ob-input{display:block;width:100%;height:48px;padding:7px 14px;border:1px solid var(--ob-border-l4);
+  border-radius:12px;outline:none;background:transparent;color:var(--ob-label-primary);
+  font-family:inherit;font-weight:inherit;font-size:14px;line-height:24px}
+.ob-input:focus{border-color:var(--ob-label-primary)}
+.ob-input::placeholder{color:var(--ob-label-caption);opacity:1}
+.ob-key-error{position:absolute;top:100%;width:100%;margin:8px 0 0;color:var(--ob-label-primary);
+  font-size:14px;line-height:22px}
+.ob-visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.ob-adv-field{font-size:13px;color:var(--ob-label-secondary)}
+.ob-adv-field summary{cursor:pointer;margin-bottom:8px}
+.ob-adv-field .ob-input{margin-top:2px}
+
+/* 跳过确认 */
+.ob-mask{position:fixed;inset:0;z-index:81;display:grid;place-items:center;padding:16px;background:var(--overlay);backdrop-filter:var(--overlay-blur)}
+html[data-panel="dark"] .ob-mask{background:rgb(0 0 0/.6)}
+.ob-dialog{width:min(420px,100%);max-height:calc(100vh - 48px);overflow:auto;outline:none;
+  background:var(--ob-elevated);color:var(--ob-label-primary);border:1px solid var(--ob-border-l2);
+  border-radius:12px;padding:18px 20px 16px;box-shadow:0 18px 48px rgb(0 0 0/.3)}
+html[data-panel="dark"] .ob-dialog{background:#212327;box-shadow:0 18px 48px rgb(0 0 0/.6)}
+.ob-dialog h3{font-size:15px;margin:0 0 8px}
+.ob-dialog p{font-size:13px;color:var(--ob-label-secondary);line-height:1.75;margin:0 0 14px}
+.ob-dialog-actions{display:flex;justify-content:flex-end;gap:10px}
+.ob-dialog-actions button{height:38px;padding:0 16px;border-radius:10px;font-family:var(--ob-font);
+  font-size:13.5px;font-weight:500;cursor:pointer}
+
+.ob-key-note{margin:0;max-width:440px;text-align:center;font-size:13px;line-height:22px;color:var(--ob-label-caption)}
