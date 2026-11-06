@@ -1,9 +1,20 @@
 # Glyph
 
+[![CI](https://github.com/woaichidabing/glyph/actions/workflows/ci.yml/badge.svg)](https://github.com/woaichidabing/glyph/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 本地运行的英语学习 Agent：批改、查词、背词、计划、长期记忆，全部在自己的电脑上跑。
 
 Glyph 用「工具循环」驱动：模型自己决定调哪个工具（批改、查词、OCR、记忆、计划……），
 业务能力都是可插拔的工具，运行时本身不写死任何批改流程。
+
+![对话](docs/images/ask.png)
+
+| 词典 | 计划 |
+|---|---|
+| ![词典](docs/images/dict.png) | ![计划](docs/images/plan.png) |
+
+![设置](docs/images/settings.png)
 
 ## 功能
 
@@ -65,8 +76,6 @@ npm run desktop    # 会自己拉起后端
 python scripts/build_dict_db.py
 ```
 
-没有词典库时，词典相关功能不可用，相关测试会跳过而不是失败。
-
 ## 测试
 
 ```bash
@@ -105,12 +114,11 @@ npm run dist:win
 ## 已知限制
 
 - Windows 安装包暂未做代码签名，首次安装会提示「未知发布者」；
-- 暂不支持自动更新；
-- 词典库需要自行构建（见上）。
+- 暂不支持自动更新。
 
 ## 许可证
 
 MIT。第三方数据与字体：
 
 - 词典数据来自 [ECDICT](https://github.com/skywind3000/ECDICT)（MIT）；
-- 字体 Montserrat，SIL Open Font License 1.1。
+- 字体 Montserrat，SIL Open Font License 1.1（见 `web-desktop2/src/assets/fonts/Montserrat-OFL.txt`）。

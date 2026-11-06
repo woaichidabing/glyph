@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useFocusTrap } from "../../hooks/useFocusTrap";
 import {
   getAgentConfig,
   getBrainModels,
@@ -182,6 +183,9 @@ export default function Settings({ open, onClose, brain }: { open: boolean; onCl
   const [styleMsg, setStyleMsg] = useState<{ kind: "ok" | "err"; text: string } | null>(null);
 
 
+  const modalRef = useRef<HTMLDivElement | null>(null);
+  useFocusTrap(modalRef, open);
+
   // 每次打开：重置到外观页（dev 下可被 ?tab= 覆盖），向后端问一句"配没配 key、当前什么说话风格"
   useEffect(() => {
     if (!open) return;
@@ -242,7 +246,7 @@ export default function Settings({ open, onClose, brain }: { open: boolean; onCl
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className={"set-modal set-modal-tabs" + (tab === "storage" ? " set-modal-wide" : "")} role="dialog" aria-modal="true" aria-label="设置">
+      <div ref={modalRef} className={"set-modal set-modal-tabs" + (tab === "storage" ? " set-modal-wide" : "")} role="dialog" aria-modal="true" aria-label="设置">
         <div className="set-head">
           <h3>设置</h3>
           <button className="set-x" aria-label="关闭设置" onClick={onClose}>
@@ -252,12 +256,13 @@ export default function Settings({ open, onClose, brain }: { open: boolean; onCl
 
         <div className="set-shell">
           <nav className="set-nav">
-            {NAV.map((item) => (
+            {NAV.map((item, index) => (
               <button
                 key={item.id}
                 type="button"
                 className={"set-nav-item" + (tab === item.id ? " on" : "")}
                 aria-current={tab === item.id ? "page" : undefined}
+                data-autofocus={index === 0 ? true : undefined}
                 onClick={() => {
                   setTab(item.id);
                   setMsg(null);
